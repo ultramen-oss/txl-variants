@@ -1,0 +1,5 @@
+*.zip 
+*.tar 
+*.tar.gz 
+*.sql 
+node_modules/
