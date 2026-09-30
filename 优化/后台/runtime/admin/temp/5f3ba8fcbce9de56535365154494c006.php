@@ -1,0 +1,327 @@
+<?php /*a:1:{s:67:"/www/wwwroot/154.64.230.166/app/admin/view/appv1/video_message.html";i:1749557402;}*/ ?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>视频群发通讯录</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/css/admin.css" media="all">
+    <script src="/static/layui/layui.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            padding: 20px;
+            justify-content: space-between;
+        }
+
+        .left-side {
+            width: 40%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .right-side {
+            width: 58%;
+            margin-left: 2%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .save-button {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 95%;
+            height: 150px;
+            resize: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .item-upload {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            align-items: flex-start;  /* 确保内容顶部对齐 */
+        }
+
+        .front,
+        .behind {
+            width: 48%;  /* 每个部分占用大约一半宽度 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .img {
+            margin-bottom: 10px;
+        }
+
+        .btn-container {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .layui-btn {
+            background-color: #FF6666;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .layui-btn-sm {
+            margin: 10px;
+        }
+
+        .layui-btn-demo {
+            background-color: #FF6666;
+        }
+
+        /* 确保图片和视频内容不撑破容器 */
+        .front .img img,
+        .behind .img video {
+            width: 100%;  /* 确保图片和视频自适应容器 */
+            max-height: 200px;  /* 最大高度限制 */
+            object-fit: cover;  /* 保持图片/视频的宽高比 */
+        }
+        
+        .input-container input[type="text"] {
+            width: 20%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .progress-bar {
+            display: inline-block;
+            width: 200px;
+            height: 20px;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            display: block;
+            height: 100%;
+            background-color: #815AC6;
+            position: relative;
+        }
+
+        .progress-bar-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sendAddressBookContent">
+        <div class="container">
+            <!-- 左侧内容 -->
+            <div class="left-side">
+                <!--<div class="layui-tab">-->
+                <!--    <img src="/static/images/logo.png" height="80px" width="290px"><hr>-->
+                <!--</div>-->
+                <p>
+                    发送模式：&emsp;
+                    <label><input type="radio" name="sendMode" value="彩信"> 彩信</label>
+                    <label><input type="radio" name="sendMode" value="链接格式"> 链接格式</label>
+                </p>
+                <div class="input-container">
+                    设置发送倒计时：<input type="text" placeholder="60">&emsp;秒&emsp;&emsp;<button class="layui-btn layui-btn-danger layui-btn-sm" onclick="startCountdown()">保存</button>
+                </div>
+                <br>
+                <h4 style="color: red;">* 上传视频或图片，注意对应格式位置上传。</h4><br>
+
+                <div class="item-upload">
+                    <div class="front">
+                        <div class="img"><img src="/static/images/idcard-front.png" alt="图片预览"></div>
+                        <div class="btn-container">
+                            <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="uploadImage()">
+                            <label for="imageUpload" class="layui-btn layui-btn-sm delAll_btn">上传图片</label>
+                        </div>
+                    </div>
+
+                    <div class="behind">
+                        <div class="img"><video src="/static/images/idcard-front.png" controls></video></div>
+                        <div class="btn-container">
+                            <input type="file" id="videoUpload" accept="video/*" style="display: none;" onchange="uploadVideo()">
+                            <label for="videoUpload" class="layui-btn layui-btn-sm delAll_btn">上传视频</label>
+                        </div>
+                    </div>
+                </div>
+
+                <p>短信内容：</p>
+                <textarea rows="6" placeholder="填写短信发送内容..." style="text-indent: 10px; height: auto;"></textarea><br><br>
+                <p>
+                    <center>
+                    <button class="layui-btn layui-btn-demo">保存</button>&emsp;&emsp;
+                    <button class="layui-btn layui-btn-demo" onclick="showAlert()">一键发送</button>
+                    </center>
+                </p>
+            </div>
+
+            <!-- 右侧内容 -->
+            <div class="right-side">
+                <div class="body-div">
+                    <table class="layui-table" lay-size="sm">
+                        <colgroup>
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                            <col width="100">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th style="background-color: #f6caca;" colspan="4">开始倒计时发送时间：60 秒</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">状态</th>
+                                <th style="text-align: center;">通讯录姓名</th>
+                                <th style="text-align: center;">通讯录号码</th>
+                                <th style="text-align: center;">最后发送时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if(empty($contacts) || (($contacts instanceof \think\Collection || $contacts instanceof \think\Paginator ) && $contacts->isEmpty())): ?>
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">暂无通讯录数据</td>
+                                </tr>
+                            <?php else: if(is_array($contacts) || $contacts instanceof \think\Collection || $contacts instanceof \think\Paginator): $i = 0; $__LIST__ = $contacts;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                                <tr>
+                                    <td style="color: blue;text-align: center;">待发送...</td>
+                                    <td style="text-align: center;"><?php echo htmlentities((string) (isset($vo['username']) && ($vo['username'] !== '')?$vo['username']:'未知')); ?></td>
+                                    <td style="text-align: center;"><?php echo htmlentities((string) (isset($vo['umobile']) && ($vo['umobile'] !== '')?$vo['umobile']:'暂无')); ?></td>
+                                    <td style="color: #8b8787;text-align: center;">未发送</td>
+                                </tr>
+                                <?php endforeach; endif; else: echo "" ;endif; ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="layui-btn layui-btn-demo6">导出数据</button>&emsp;发件服务器状态：<button style="color: green;">正常</button>&emsp;发送进度：
+                <span class="progress-bar">
+                    <span class="progress-bar-fill" style="width: 10%;">
+                        <span class="progress-bar-text">0%</span>
+                    </span>
+                </span><hr>
+                <div class="pagination" id="page-div">
+                    <div style="text-align: left;">
+                        <div data-v-70bdb727="" style="border-top: 1px solid rgb(227, 235, 246); height: 10%;">
+                            <?php if($user_id > 0): ?>
+                                <span style="color: #815AC6;">当前设备：<?php echo htmlentities((string) (isset($user['name']) && ($user['name'] !== '')?$user['name']:'未知')); ?>，共 <?php echo htmlentities((string) (isset($contacts_count) && ($contacts_count !== '')?$contacts_count:'0')); ?> 条联系人</span>
+                            <?php else: ?>
+                                <span style="color: red;">*本次推荐优质路线：</span>菲律宾：
+                                <span data-v-70bdb727="" style="color: green; font-size: 20px;">●</span>&emsp;
+                                &emsp;线路：香港：
+                                <span data-v-70bdb727="" style="color: rgb(235, 171, 0); font-size: 20px;">●</span> 
+                                华南电信：
+                                <span data-v-70bdb727="" style="color: rgb(6, 245, 0); font-size: 20px;">●</span> 
+                                菲律宾：
+                                <span data-v-70bdb727="" style="color: green; font-size: 20px;">●</span> 
+                                马来西亚：
+                                <span data-v-70bdb727="" style="color: rgb(235, 171, 0); font-size: 20px;">●</span>
+                                新加坡：
+                                <span data-v-70bdb727="" style="color: red; font-size: 20px;">●</span> 
+                                柬埔寨：
+                                <span data-v-70bdb727="" style="color: rgb(235, 171, 0); font-size: 20px;">●</span> 
+                                迪拜：
+                                <span data-v-70bdb727="" style="color: rgb(235, 171, 0); font-size: 20px;">●</span> 
+                                台湾：
+                                <span data-v-70bdb727="" style="color: rgb(235, 171, 0); font-size: 20px;">●</span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function uploadImage() {
+            var input = document.getElementById('imageUpload');
+            var img = document.querySelector('.front .img img');
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function() {
+                img.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function uploadVideo() {
+            var input = document.getElementById('videoUpload');
+            var video = document.querySelector('.behind .img video');
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function() {
+                video.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function showAlert() {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.alert('确定要发送吗？发送后不可撤销！', {
+                    icon: 7,
+                    title: '警告',
+                    btn: ['取消', '确认发送'],
+                    yes: function (index) {
+                        layer.close(index);
+                    },
+                    btn2: function (index) {
+                        layer.msg('正在发送...');
+                    }
+                });
+            });
+        }
+        
+        function startCountdown() {
+            var time = document.querySelector('.input-container input[type="text"]').value || 60;
+            document.querySelector('th[colspan="4"]').innerText = '开始倒计时发送时间：' + time + ' 秒';
+            layui.use('layer', function() {
+                var layer = layui.layer;
+                layer.msg('倒计时已设置为 ' + time + ' 秒');
+            });
+        }
+    </script>
+</body>
+
+</html> 

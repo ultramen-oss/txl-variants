@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>选择下级用户</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="/static/admin/css/admin.css" media="all">
+  <style>
+    body {
+      padding: 15px;
+      background-color: #f5f7fa;
+    }
+    .user-list {
+      background-color: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 15px;
+    }
+    .search-bar {
+      margin-bottom: 15px;
+    }
+    .user-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #f0f0f0;
+      transition: all 0.2s;
+    }
+    .user-item:hover {
+      background-color: #f8f9fa;
+    }
+    .user-item .layui-form-checkbox {
+      margin-right: 10px;
+    }
+    .user-item .name {
+      flex: 1;
+      font-weight: 500;
+      color: #333;
+    }
+    .user-item .code {
+      background-color: #f0f2f5;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #7952b3;
+      margin-right: 10px;
+    }
+    .user-item .status {
+      margin-left: 8px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+    .status-active {
+      background-color: #d1e7dd;
+      color: #0f5132;
+    }
+    .status-disabled {
+      background-color: #f8d7da;
+      color: #842029;
+    }
+    .footer-actions {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .selected-count {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #666;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="layui-container">
+    <div class="user-list">
+      <div class="search-bar">
+        <div class="layui-input-inline" style="width: 300px;">
+          <input type="text" id="searchInput" placeholder="搜索用户名或邀请码" class="layui-input">
+        </div>
+        <button type="button" class="layui-btn" id="searchBtn">
+          <i class="fa fa-search"></i> 搜索
+        </button>
+      </div>
+      
+      <form class="layui-form" id="userForm">
+        {notempty name="users"}
+        {volist name="users" id="user"}
+        <div class="user-item">
+          <input type="checkbox" name="users[]" value="{$user.invite_code}" title="" lay-skin="primary" class="user-checkbox">
+          <div class="name">{$user.nickname} ({$user.name})</div>
+          <div class="code">邀请码: {$user.invite_code}</div>
+          <div class="status {if $user.status eq 1}status-active{else}status-disabled{/if}">
+            {if $user.status eq 1}正常{else}已禁用{/if}
+          </div>
+        </div>
+        {/volist}
+        {else}
+        <div style="padding: 20px; text-align: center; color: #999;">
+          <i class="fa fa-info-circle"></i> 暂无普通账号用户数据
+        </div>
+        {/notempty}
+      </form>
+      
+      <div class="selected-count">
+        已选择: <span id="selectedCount">0</span> 个用户
+      </div>
+      
+      <div class="footer-actions">
+        <button type="button" class="layui-btn" id="selectAllBtn">
+          <i class="fa fa-check-square-o"></i> 全选
+        </button>
+        <button type="button" class="layui-btn layui-btn-primary" id="deselectAllBtn">
+          <i class="fa fa-square-o"></i> 取消全选
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/static/layui/layui.js"></script>
+  <script>
+    layui.use(['form'], function(){
+      var form = layui.form;
+      var $ = layui.jquery;
+      
+      // 更新已选择数量
+      function updateSelectedCount() {
+        var count = $('input.user-checkbox:checked').length;
+        $('#selectedCount').text(count);
+      }
+      
+      // 监听复选框变化
+      form.on('checkbox', function(data){
+        updateSelectedCount();
+      });
+      
+      // 全选
+      $('#selectAllBtn').on('click', function(){
+        $('input.user-checkbox').prop('checked', true);
+        form.render('checkbox');
+        updateSelectedCount();
+      });
+      
+      // 取消全选
+      $('#deselectAllBtn').on('click', function(){
+        $('input.user-checkbox').prop('checked', false);
+        form.render('checkbox');
+        updateSelectedCount();
+      });
+      
+      // 搜索功能
+      $('#searchBtn, #searchInput').on('keyup click', function(e){
+        if(e.type === 'keyup' && e.keyCode !== 13 && this.id === 'searchInput') {
+          return;
+        }
+        
+        var keyword = $('#searchInput').val().toLowerCase();
+        
+        $('.user-item').each(function(){
+          var name = $(this).find('.name').text().toLowerCase();
+          var code = $(this).find('.code').text().toLowerCase();
+          
+          if(name.indexOf(keyword) > -1 || code.indexOf(keyword) > -1) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      });
+      
+      // 绑定回车搜索
+      $('#searchInput').on('keypress', function(e){
+        if(e.which === 13) {
+          $('#searchBtn').click();
+          return false;
+        }
+      });
+    });
+    
+    // 导出选择的邀请码函数，供父窗口调用
+    function getSelectedInvites() {
+      var selectedInvites = [];
+      layui.jquery('input.user-checkbox:checked').each(function(){
+        selectedInvites.push(this.value);
+      });
+      return selectedInvites;
+    }
+  </script>
+  
+  /* 移动端响应式适配 */
+  @media screen and (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+    
+    .user-list {
+      padding: 12px;
+    }
+    
+    .search-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    
+    .search-bar .layui-input-inline {
+      width: 100% !important;
+      margin-right: 0;
+    }
+    
+    .search-bar button {
+      width: 100%;
+    }
+    
+    .user-item {
+      padding: 8px;
+    }
+    
+    .user-item .code {
+      font-size: 12px;
+      padding: 3px 6px;
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .footer-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .footer-actions .layui-btn {
+      width: 100%;
+    }
+    
+    .selected-count {
+      margin-top: 8px;
+      text-align: center;
+    }
+  }
+  
+  /* 针对更小屏幕的优化 */
+  @media screen and (max-width: 480px) {
+    .user-item {
+      flex-wrap: wrap;
+    }
+    
+    .user-item .name {
+      width: 100%;
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+    
+    .user-item .code {
+      max-width: 90px;
+      margin-top: 3px;
+    }
+    
+    .user-item .status {
+      font-size: 11px;
+      margin-left: 5px;
+    }
+    
+    .layui-form-checkbox {
+      margin-top: 0;
+    }
+    
+    .layui-form-checkbox span {
+      font-size: 13px;
+    }
+  }
+</body>
+</html> 

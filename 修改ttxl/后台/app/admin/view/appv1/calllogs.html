@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>通话记录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css" media="all" />
+  <style>
+    body { background: #fff; margin: 0; font-size: 13px; color: #333; }
+    .top { padding: 12px 16px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .btn { border: 0; border-radius: 4px; padding: 8px 12px; color: #fff; cursor: pointer; }
+    .btn-clear { background: #e74c3c; }
+    .wrap { padding: 12px; }
+    .empty { text-align: center; color: #999; padding: 30px 0; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div><i class="fa fa-phone"></i> 通话记录</div>
+    <div style="display:flex;gap:8px;">
+      {if $current_admin.role_type == 'super_admin' || $current_admin.role_type == 'admin' || ($current_admin.role_type == 'user' && $current_admin.can_export_data == 1)}
+      <button class="btn" style="background:#f39c12;" onclick="exportTxt()"><i class="fa fa-file-text-o"></i> 导出TXT</button>
+      <button class="btn" style="background:#27ae60;" onclick="exportExcel()"><i class="fa fa-file-excel-o"></i> 导出Excel</button>
+      {/if}
+      {if $current_admin.role_type == 'super_admin' || $current_admin.role_type == 'admin' || ($current_admin.role_type == 'user' && $current_admin.can_delete_user == 1)}
+      <button class="btn btn-clear" id="clearCallLogs"><i class="fa fa-trash"></i> 清空记录</button>
+      {/if}
+    </div>
+  </div>
+
+  <div class="wrap">
+    <table class="layui-table" lay-skin="line">
+      <thead>
+        <tr>
+          <th width="180">时间</th>
+          <th width="160">号码</th>
+          <th width="110">类型</th>
+          <th width="100">时长(秒)</th>
+          <th>联系人</th>
+        </tr>
+      </thead>
+      <tbody>
+      {if condition="empty($info) || (is_array($info) && count($info)==0)"}
+        <tr>
+          <td colspan="5"><div class="empty"><i class="fa fa-folder-open-o"></i> 暂无通话记录</div></td>
+        </tr>
+      {else/}
+        {volist name="info" id="vo"}
+        <tr>
+          <td>{$vo.call_time|default=''}</td>
+          <td>{$vo.call_tel|default=''}</td>
+          <td>
+            {switch vo.call_type}
+              {case 1}呼入{/case}
+              {case 2}呼出{/case}
+              {case 3}未接{/case}
+              {default /}未知
+            {/switch}
+          </td>
+          <td>{$vo.duration|default='0'}</td>
+          <td>{$vo.call_name|default='-'}</td>
+        </tr>
+        {/volist}
+      {/if}
+      </tbody>
+    </table>
+
+    {if condition="!is_array($info)"}{$info->render()|raw}{/if}
+  </div>
+
+  <script src="/static/jquery/jquery.min.js"></script>
+  <script src="/static/layui/layui.js"></script>
+  <script>
+    function getUrlParam(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return decodeURI(r[2]);
+      return null;
+    }
+
+    $('#clearCallLogs').click(function () {
+      var userId = getUrlParam('id');
+      if (!userId) return;
+      $.post('/admin/appv1/clearCallLogs', { id: userId }, function (res) {
+        if (res && res.code == 1) {
+          location.reload();
+        } else {
+          alert((res && res.msg) ? res.msg : '清空失败');
+        }
+      }, 'json');
+    });
+
+    function exportTxt() {
+      var rows = [];
+      $('table tbody tr').each(function () {
+        var tds = $(this).find('td');
+        if (tds.length === 5) {
+          rows.push([
+            $(tds[0]).text().trim(),
+            $(tds[1]).text().trim(),
+            $(tds[2]).text().trim(),
+            $(tds[3]).text().trim(),
+            $(tds[4]).text().trim()
+          ]);
+        }
+      });
+      if (rows.length === 0) {
+        alert('暂无通话记录可导出');
+        return;
+      }
+
+      var content = "通话时间,通话号码,通话类型,时长(秒),联系人\n";
+      rows.forEach(function (r) {
+        content += r.join(",") + "\n";
+      });
+      var blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      var a = document.createElement('a');
+      a.download = '通话记录_' + Date.now() + '.txt';
+      a.href = window.URL.createObjectURL(blob);
+      a.click();
+    }
+
+    function exportExcel() {
+      var userId = getUrlParam('id');
+      if (!userId) return;
+      window.location.href = "/admin/appv1/exportData?id=" + userId + "&type=calls&format=excel";
+    }
+  </script>
+</body>
+</html>

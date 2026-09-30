@@ -1,0 +1,38 @@
+{
+	"name": "静默获取手机相册图片视频",
+	"id": "vutet-getGalleryImages",
+	"version": "2.0.4",
+	"description": "iOS、Android简单快捷获取相册图片、视频，支持时间范围检索、分页",
+	"_dp_type": "nativeplugin",
+	"_dp_nativeplugin": {
+		"ios": {
+			"plugins": [{
+				"type": "module",
+				"name": "vutet-getGalleryImages",
+				"class": "GalleryModule"
+			}],
+			"frameworks": [],
+			"integrateType": "framework",
+			"deploymentTarget": "9.0"
+		},
+		"android": {
+			"plugins": [
+				{
+					"type": "module",
+					"name": "vutet-getGalleryImages",
+					"class": "io.dcloud.uniplugin.DcpGalleryModule"
+				}
+			],
+			"integrateType": "aar",
+			"minSdkVersion": "28",
+			"abis": [
+		        "armeabi-v7a",
+		        "arm64-v8a",
+		        "x86"
+		     ],
+			"permissions": [
+				"android.permission.READ_EXTERNAL_STORAGE"
+			]
+		}
+	}
+}

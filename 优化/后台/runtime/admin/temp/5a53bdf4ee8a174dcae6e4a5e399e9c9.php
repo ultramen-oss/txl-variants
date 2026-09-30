@@ -1,0 +1,561 @@
+<?php /*a:1:{s:66:"/www/wwwroot/154.64.230.166/app/admin/view/appv1/admin_config.html";i:1749557136;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>后台路由设置</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="/static/public/jquery/jquery.min.js"></script>
+  <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="/static/css/admin.css" media="all">
+  <!-- 添加layui.js引用 -->
+  <script src="/static/layui/layui.js"></script>
+  <style type="text/css">
+    body { 
+      background-color: #f8f9fc; 
+      padding: 0; 
+      margin: 0; 
+      font-family: "Microsoft YaHei", sans-serif; 
+    }
+    
+    /* 容器 */
+    .tplay-body-div {
+      background: #fff;
+      border-radius: 8px;
+      height: 100%;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    
+    /* 顶部标题区域 */
+    .page-header {
+      background: linear-gradient(45deg, #8257e6, #6c45c4);
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 8px 8px 0 0;
+    }
+    
+    .page-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .page-title i {
+      color: #fff;
+      font-size: 20px;
+    }
+    
+    /* 内容区域 */
+    .settings-container {
+      padding: 25px;
+      overflow-y: auto;
+      flex: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    /* 表单样式 */
+    .settings-form {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      background: #fff;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    
+    .form-section {
+      padding: 20px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .form-section:last-child {
+      border-bottom: none;
+    }
+    
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .section-title i {
+      color: #8257e6;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
+    
+    .form-group .help-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    .current-value {
+      color: #6f42c1;
+      font-weight: 500;
+    }
+    
+    .form-actions {
+      padding: 20px;
+      text-align: center;
+      background: #f9f9fb;
+      border-top: 1px solid #f0f0f0;
+      border-radius: 0 0 8px 8px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    /* 自定义按钮样式 */
+    .btn-purple {
+      background-color: #8257e6 !important;
+      border-color: #6f42c1 !important;
+    }
+    
+    .btn-purple:hover {
+      background-color: #6f42c1 !important;
+    }
+    
+    /* 成功提示框 */
+    .status-toast {
+      position: fixed;
+      top: -100px;
+      right: 20px;
+      min-width: 250px;
+      max-width: 350px;
+      background: linear-gradient(145deg, #4CAF50, #2E7D32);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      transform: translateY(0);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .status-toast.show {
+      transform: translateY(120px);
+      opacity: 1;
+    }
+
+    .status-toast-icon {
+      font-size: 24px;
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .status-toast-content {
+      flex: 1;
+    }
+
+    .status-toast-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+      display: block;
+      font-size: 16px;
+    }
+
+    .status-toast-message {
+      opacity: 0.95;
+      font-size: 14px;
+    }
+
+    .status-toast-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+    }
+
+    .status-toast-progress-bar {
+      height: 100%;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 0 0 8px 8px;
+      animation: toast-progress 3s linear forwards;
+    }
+
+    @keyframes toast-progress {
+      0% {
+        width: 100%;
+      }
+      100% {
+        width: 0;
+      }
+    }
+    
+    /* 现代化弹窗样式 */
+    .modern-dialog {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .permission-dialog {
+      padding: 0;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .permission-dialog-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      color: #374151;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 20px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .permission-dialog-title i {
+      color: #6366f1;
+      background: rgba(99, 102, 241, 0.1);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-size: 20px;
+    }
+    
+    .permission-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 20px;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .status-toast.warning {
+      background: linear-gradient(145deg, #ff9800, #ed6c02);
+    }
+
+    .status-toast.info {
+      background: linear-gradient(145deg, #3b82f6, #2563eb);
+    }
+  </style>
+</head>
+<body>
+  <div class="tplay-body-div">
+    <!-- 页面头部 -->
+    <div class="page-header">
+      <div class="page-title">
+        <i class="fa fa-wrench"></i>
+        后台路由设置
+      </div>
+    </div>
+    
+    <!-- 设置内容 -->
+    <div class="settings-container">
+      <div class="settings-form">
+        <div class="form-section">
+          <div class="section-title">
+            <i class="fa fa-link"></i> 登录链接设置
+          </div>
+          
+          <div class="form-group">
+            <label for="loginRoute">自定义登录链接：</label>
+            <input type="text" class="layui-input" id="loginRoute" placeholder="/admin 或 /uxwnet等">
+            <div class="help-text">
+              多个链接请用英文逗号分隔，例如：/admin, /uxwnet
+            </div>
+            <div class="help-text">
+              当前支持的链接: <span id="currentLoginRoutes" class="current-value">/admin</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 添加超时设置部分 -->
+        <div class="form-section">
+          <div class="section-title">
+            <i class="fa fa-clock-o"></i> 会话超时设置
+          </div>
+          
+          <div class="form-group">
+            <label for="sessionTimeout">长时间未操作自动退出时间(分钟)：</label>
+            <input type="number" class="layui-input" id="sessionTimeout" min="1" max="180" placeholder="请输入1-180之间的数字">
+            <div class="help-text">
+              设置用户无操作多长时间后自动退出系统，默认为20分钟，建议设置在5-60分钟之间
+            </div>
+            <div class="help-text">
+              当前设置: <span id="currentTimeout" class="current-value">20</span> 分钟
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 底部操作按钮 -->
+    <div class="form-actions">
+      <button class="layui-btn btn-purple" id="saveRouteSettings">
+        <i class="fa fa-save"></i> 保存设置
+      </button>
+      <button class="layui-btn layui-btn-primary" id="cancelRouteSettings">
+        取消
+      </button>
+    </div>
+  </div>
+  
+  <!-- 状态通知弹窗 -->
+  <div class="status-toast" id="statusToast">
+    <div class="status-toast-icon">
+      <i class="fa fa-check-circle"></i>
+    </div>
+    <div class="status-toast-content">
+      <span class="status-toast-title">操作成功</span>
+      <span class="status-toast-message">登录链接设置已成功保存</span>
+    </div>
+    <div class="status-toast-progress">
+      <div class="status-toast-progress-bar"></div>
+    </div>
+  </div>
+  
+  <script type="text/javascript">
+    // 直接使用全局变量而不是模块方式
+    var layer;
+    
+    layui.use('layer', function() {
+      layer = layui.layer;
+      
+      // 文档就绪后执行
+      $(document).ready(function() {
+        // 获取当前路由设置
+        $.ajax({
+          url: "<?php echo url('admin/appv1/getRouteSettings'); ?>",
+          type: 'post',
+          dataType: 'json',
+          success: function(res) {
+            if (res.code == 1) {
+              // 显示当前设置值
+              var loginRoutes = res.data.login_routes || ['/admin'];
+              $("#loginRoute").val(loginRoutes.join(', '));
+              $("#currentLoginRoutes").text(loginRoutes.join(', '));
+              
+              // 保存原始值，用于判断是否有变化
+              $("#loginRoute").data('original', loginRoutes.join(', '));
+              
+              // 显示超时设置值
+              var timeout = res.data.session_timeout || 20;
+              // 确保是数字类型
+              timeout = parseInt(timeout);
+              $("#sessionTimeout").val(timeout);
+              $("#currentTimeout").text(timeout);
+              
+              // 保存原始超时设置值
+              $("#sessionTimeout").data('original', timeout);
+            } else {
+              showStatusToast({
+                type: 'error',
+                title: '获取失败',
+                message: res.msg || '获取设置失败'
+              });
+            }
+          },
+          error: function(xhr, status, error) {
+            showStatusToast({
+              type: 'error',
+              title: '网络错误',
+              message: '请检查网络连接并重试'
+            });
+          }
+        });
+        
+        // 保存设置
+        $("#saveRouteSettings").on('click', function() {
+          var loginRouteValue = $("#loginRoute").val().trim();
+          var sessionTimeoutValue = $("#sessionTimeout").val().trim();
+          
+          // 检查登录链接是否为空
+          if (loginRouteValue === '') {
+            showStatusToast({
+              type: 'warning',
+              title: '验证失败',
+              message: '登录链接不能为空，请至少输入一个登录链接'
+            });
+            return false;
+          }
+          
+          // 检查超时时间是否有效
+          var timeout = parseInt(sessionTimeoutValue);
+          if (isNaN(timeout) || timeout < 1 || timeout > 180) {
+            showStatusToast({
+              type: 'warning',
+              title: '验证失败',
+              message: '超时时间设置无效，请输入1-180之间的整数'
+            });
+            return false;
+          }
+          
+          // 检查是否有变化
+          var originalTimeout = parseInt($("#sessionTimeout").data('original'));
+          var hasChanges = loginRouteValue !== $("#loginRoute").data('original') || timeout !== originalTimeout;
+          
+          if (!hasChanges) {
+            showStatusToast({
+              type: 'info',
+              title: '设置未发生变化',
+              message: '当前设置与原始设置相同，无需保存'
+            });
+            return false;
+          }
+          
+          var loginRoutes = loginRouteValue.split(',').map(function(item) {
+            var route = item.trim();
+            // 确保以斜杠开头
+            return route.charAt(0) === '/' ? route : '/' + route;
+          }).filter(function(item) {
+            return item !== '';
+          });
+          
+          // 提交保存
+          $.ajax({
+            url: "<?php echo url('admin/appv1/saveRouteSettings'); ?>",
+            type: 'post',
+            data: {
+              login_routes: loginRoutes,
+              session_timeout: timeout
+            },
+            dataType: 'json',
+            success: function(res) {
+              if (res.code == 1) {
+                // 更新原始值
+                $("#loginRoute").data('original', loginRoutes.join(', '));
+                $("#currentLoginRoutes").text(loginRoutes.join(', '));
+                $("#sessionTimeout").data('original', timeout);
+                $("#currentTimeout").text(timeout);
+                
+                // 显示成功提示
+                showStatusToast({
+                  type: 'success',
+                  title: '保存成功',
+                  message: '系统设置已成功保存'
+                });
+                
+                // 3秒后关闭弹窗
+                setTimeout(function() {
+                  if (window.parent && window.parent.layer) {
+                    window.parent.layer.closeAll('iframe');
+                  }
+                }, 2000);
+              } else {
+                showStatusToast({
+                  type: 'error',
+                  title: '保存失败',
+                  message: res.msg || '保存失败，请重试'
+                });
+              }
+            },
+            error: function(xhr, status, error) {
+              showStatusToast({
+                type: 'error',
+                title: '网络错误',
+                message: '请检查网络连接并重试'
+              });
+            }
+          });
+        });
+        
+        // 取消按钮
+        $("#cancelRouteSettings").on('click', function() {
+          if (window.parent && window.parent.layer) {
+            window.parent.layer.closeAll('iframe');
+          }
+        });
+        
+        // 显示状态通知弹窗
+        function showStatusToast(options) {
+          var $toast = $('#statusToast');
+          var icon = 'fa-check-circle';
+          var background = 'linear-gradient(145deg, #4CAF50, #2E7D32)';
+          
+          // 设置图标和背景色
+          if (options.type === 'error') {
+            icon = 'fa-times-circle';
+            background = 'linear-gradient(145deg, #f44336, #d32f2f)';
+            $toast.addClass('error').removeClass('warning info');
+          } else if (options.type === 'warning') {
+            icon = 'fa-exclamation-triangle';
+            background = 'linear-gradient(145deg, #ff9800, #ed6c02)';
+            $toast.addClass('warning').removeClass('error info');
+          } else if (options.type === 'info') {
+            icon = 'fa-info-circle';
+            background = 'linear-gradient(145deg, #3b82f6, #2563eb)';
+            $toast.addClass('info').removeClass('error warning');
+          } else {
+            $toast.removeClass('error warning info');
+          }
+          
+          // 设置图标
+          $toast.find('.status-toast-icon i').attr('class', 'fa ' + icon);
+          
+          // 设置标题和消息
+          $toast.find('.status-toast-title').text(options.title || '操作成功');
+          $toast.find('.status-toast-message').text(options.message || '');
+          
+          // 设置背景色
+          $toast.css('background', background);
+          
+          // 重置进度条动画
+          var $progressBar = $toast.find('.status-toast-progress-bar');
+          $progressBar.remove();
+          $toast.find('.status-toast-progress').append('<div class="status-toast-progress-bar"></div>');
+          
+          // 显示通知
+          $toast.addClass('show');
+          
+          // 3秒后隐藏通知
+          setTimeout(function() {
+            $toast.removeClass('show');
+          }, 3000);
+        }
+      });
+    });
+  </script>
+</body>
+</html> <!-- 最后更新时间: 2025-05-03 10:53:27 -->

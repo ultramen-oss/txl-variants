@@ -1,0 +1,435 @@
+/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #eff0f4;
+}
+
+.container {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  left: -80px;
+}
+
+.container .drop {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  box-shadow: inset 20px 20px 20px rgba(0, 0, 0, .05),
+              25px 35px 20px rgba(0, 0, 0, .05),
+              25px 30px 30px rgba(0, 0, 0, .05),
+              inset -20px -20px 25px rgba(255, 255, 255, 0.9);
+  transition: 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 52% 48% 33% 67% / 38% 45% 55% 62%;
+}
+
+.container .drop:hover {
+  border-radius: 50%;
+}
+
+.container .drop::before {
+  content: '';
+  position: absolute;
+  top: 50px;
+  left: 85px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.9;
+}
+
+.container .drop::after {
+  content: '';
+  position: absolute;
+  top: 90px;
+  left: 110px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.9;
+}
+
+.container .drop .content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 40px;
+  gap: 15px;
+}
+
+/* 通讯后台标题样式 */
+.company-title {
+  background: linear-gradient(45deg, #333, #999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  padding: 10px 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.container .drop .content form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .drop .content form .inputBox {
+  position: relative;
+  width: 225px;
+  box-shadow: inset 2px 5px 10px rgba(0, 0, 0, .1),
+  inset -2px -5px 10px rgba(255, 255, 255, 1),
+  15px 15px 10px rgba(0, 0, 0, .05),
+  15px 10px 15px rgba(0, 0, 0, .05);
+  border-radius: 25px;
+}
+
+.container .drop .content form .inputBox::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65%;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+}
+
+/* 验证码样式 */
+.captchaBox {
+  position: relative;
+  width: 225px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.captchaBox input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 1em;
+  padding: 10px 15px;
+  box-shadow: inset 2px 5px 10px rgba(0, 0, 0, .1),
+  inset -2px -5px 10px rgba(255, 255, 255, 1),
+  15px 15px 10px rgba(0, 0, 0, .05),
+  15px 10px 15px rgba(0, 0, 0, .05);
+  border-radius: 25px;
+  width: 55%;
+}
+
+.captchaBox input::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 25%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+}
+
+.captchaBox img {
+  height: 36px;
+  width: 80px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, .1);
+  transition: all 0.3s;
+  background-color: white;
+  padding: 2px;
+  margin-right: 2px;
+}
+
+.captchaBox img:hover {
+  transform: scale(1.05);
+}
+
+.container .drop .content form .inputBox input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+  font-size: 1em;
+  padding: 10px 15px;
+}
+
+/* 登录按钮样式 */
+#login-btn-container {
+  width: 120px;
+  background-color: #ff0f5b;
+  box-shadow: inset 2px 5px 10px rgba(0, 0, 0, .1),
+  15px 15px 10px rgba(0, 0, 0, .05),
+  15px 10px 15px rgba(0, 0, 0, .05);
+  transition: 0.5s;
+  border-radius: 25px;
+}
+
+#login-btn-container:hover {
+  width: 150px;
+}
+
+#login-btn-container input[type="submit"] {
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+  font-size: 1em;
+  padding: 10px 15px;
+}
+
+.btns {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  right: -120px;
+  bottom: 0;
+  background-color: #c61dff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  line-height: 1.2em;
+  letter-spacing: 0.1em;
+  font-size: 0.8em;
+  transition: 0.25s;
+  text-align: center;
+  box-shadow: inset 10px 10px 10px rgba(190, 1, 254, .05),
+  15px 25px 10px rgba(190, 1, 254, .1),
+  15px 20px 20px rgba(190, 1, 254, .1),
+  inset -10px -10px 15px rgba(255, 255, 255, 0.5);
+  border-radius: 44% 56% 65% 35% / 57% 58% 42% 43%;
+}
+
+.btns:hover {
+  border-radius: 50%;
+}
+
+.btns::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 30px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.45;
+}
+
+.btns.signup {
+  bottom: 150px;
+  right: -140px;
+  width: 80px;
+  height: 80px;
+  border-radius: 49% 51% 52% 48% / 63% 59% 41% 37%;
+  background-color: #01b4ff;
+  box-shadow: inset 10px 10px 10px rgba(1, 180, 255, .05),
+  15px 25px 10px rgba(1, 180, 255, .1),
+  15px 20px 20px rgba(1, 180, 255, .1),
+  inset -10px -10px 15px rgba(255, 255, 255, 0.5);
+}
+
+.btns.signup::before {
+  left: 20%;
+  width: 15px;
+  height: 15px;
+}
+
+.copyright {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+
+/* 弹窗样式 */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast {
+  border-radius: 10px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  min-width: 300px;
+  max-width: 350px;
+  opacity: 0;
+  overflow: hidden;
+  padding: 16px;
+  pointer-events: auto;
+  text-align: center;
+  transform: translateY(-20px) scale(0.9);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.toast.success {
+  background: linear-gradient(45deg, #2ecc71, #4cd964);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.toast.error {
+  background: linear-gradient(45deg, #ff3b30, #ff6482);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.toast.info {
+  background: linear-gradient(45deg, #007aff, #5ac8fa);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.toast-message {
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.5;
+}
+
+/* 状态通知弹窗样式 */
+.status-toast {
+  position: fixed;
+  top: -100px;
+  right: 20px;
+  min-width: 250px;
+  max-width: 350px;
+  background: linear-gradient(145deg, #4CAF50, #2E7D32);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  transform: translateY(0);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.status-toast.error {
+  background: linear-gradient(145deg, #f44336, #d32f2f);
+}
+
+.status-toast.warning {
+  background: linear-gradient(145deg, #ff9800, #ed6c02);
+}
+
+.status-toast.show {
+  transform: translateY(120px);
+  opacity: 1;
+}
+
+.status-toast-icon {
+  font-size: 24px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-toast-content {
+  flex: 1;
+}
+
+.status-toast-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+  display: block;
+  font-size: 16px;
+}
+
+.status-toast-message {
+  opacity: 0.95;
+  font-size: 14px;
+}
+
+.status-toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+.status-toast-progress-bar {
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0 0 8px 8px;
+  animation: toast-progress 3s linear forwards;
+}
+
+@keyframes toast-progress {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+ 

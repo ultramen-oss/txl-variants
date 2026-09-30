@@ -1,0 +1,24 @@
+[2025-06-11T00:40:29+08:00][info] 字段变化: nickname, 原值: 通讯录, 新值: 相遇
+[2025-06-11T00:40:29+08:00][info] 设置字段: role_type = super_admin
+[2025-06-11T00:40:29+08:00][info] 设置字段: name = admin
+[2025-06-11T00:40:29+08:00][info] 设置字段: nickname = 相遇
+[2025-06-11T00:40:29+08:00][info] 设置字段: admin_cate_id = 1
+[2025-06-11T00:40:29+08:00][info] 设置字段: can_delete_user = 1
+[2025-06-11T00:40:29+08:00][info] 设置字段: invite_code = 
+[2025-06-11T00:40:29+08:00][info] 准备保存的数据: {"id":"1","nickname":"相遇","name":"admin","password":"e10adc3949ba59abbe56e057f20f883e","invite_code":"","thumb":"","create_time":"2025-06-11 00:40:29","update_time":"2025-06-11 00:40:29","login_time":"1749568693","login_ip":"45.207.157.49","admin_cate_id":1,"is_super":"1","role_type":"super_admin","status":1,"can_delete_user":"1","view_all_invites":"0","assigned_invites":null,"can_export_data":"0"}
+[2025-06-11T00:41:08+08:00][info] 上传请求开始 - 模块: admin, 用途: admin_thumb
+[2025-06-11T00:41:08+08:00][info] 收到文件: IMG_0254.jpeg, 大小: 123830 字节
+[2025-06-11T00:41:08+08:00][info] 创建上传目录: /www/wwwroot/154.219.101.15/public/storage/admin/admin_thumb
+[2025-06-11T00:41:08+08:00][info] 文件保存成功: /storage/admin/admin_thumb/20250611/3e9cfd3ad461655734aaaa056b76a4ae.jpeg
+[2025-06-11T00:41:08+08:00][info] 上传文件：IMG_0254.jpeg
+[2025-06-11T00:41:10+08:00][info] 字段变化: thumb, 原值: , 新值: /storage/admin/admin_thumb/20250611/3e9cfd3ad461655734aaaa056b76a4ae.jpeg
+[2025-06-11T00:41:10+08:00][info] 设置字段: role_type = super_admin
+[2025-06-11T00:41:10+08:00][info] 设置字段: name = admin
+[2025-06-11T00:41:10+08:00][info] 设置字段: nickname = 相遇
+[2025-06-11T00:41:10+08:00][info] 设置字段: admin_cate_id = 1
+[2025-06-11T00:41:10+08:00][info] 设置字段: can_delete_user = 1
+[2025-06-11T00:41:10+08:00][info] 设置字段: invite_code = 
+[2025-06-11T00:41:10+08:00][info] 设置字段: thumb = /storage/admin/admin_thumb/20250611/3e9cfd3ad461655734aaaa056b76a4ae.jpeg
+[2025-06-11T00:41:10+08:00][info] 准备保存的数据: {"id":"1","nickname":"相遇","name":"admin","password":"e10adc3949ba59abbe56e057f20f883e","invite_code":"","thumb":"\/storage\/admin\/admin_thumb\/20250611\/3e9cfd3ad461655734aaaa056b76a4ae.jpeg","create_time":"2025-06-11 00:41:10","update_time":"2025-06-11 00:41:10","login_time":"1749568693","login_ip":"45.207.157.49","admin_cate_id":1,"is_super":"1","role_type":"super_admin","status":1,"can_delete_user":"1","view_all_invites":"0","assigned_invites":null,"can_export_data":"0"}
+[2025-06-11T01:11:51+08:00][info] 登录提交数据: {"name":"admin","password":"123456","captcha":"XJHW","__token__":"005c3bc31bf75cf8d7e366d9596a130d"}
+[2025-06-11T01:11:51+08:00][info] 密码对比: 输入=[123456], MD5=[e10adc3949ba59abbe56e057f20f883e], 数据库=[e10adc3949ba59abbe56e057f20f883e]

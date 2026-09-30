@@ -1,0 +1,598 @@
+/* 全局过渡效果 - 添加在最顶部 */
+body, body *, 
+.layui-body, .layui-table, .layui-table td, .layui-table tbody tr,
+.main-content, .top-controls-bar, .search-container input,
+.user-info-container, .user-name, .layui-footer,
+.slider, .slider:before, input:checked + .slider:before,
+.edit-remark, .remark-info, .relative-item, .app-item, .contact-cell,
+.layui-layer, .layui-layer-title, .layui-layer-content,
+.filter-input, .filter-select, .contact-name, .contact-phone, .contact-extra {
+    transition: all 0.3s ease !important;
+}
+
+/* 夜间模式启动时的高级视觉效果 */
+body.night-mode .main-content {
+    background-color: #1f1f3a;
+    color: #e6e6e6;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.night-mode .layui-table {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.night-mode .top-controls-bar {
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.night-mode .search-container input {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.night-mode .batch-actions {
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 夜间模式开关样式 */
+.night-mode-toggle {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 3px 8px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.mode-label {
+    font-size: 12px;
+    margin: 0 3px;
+    color: #666;
+}
+
+/* 开关样式 */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin: 0 3px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s ease !important;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s ease !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+input:checked + .slider {
+    background: linear-gradient(135deg, #6f42c1, #8c68c9);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #6f42c1;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* 夜间模式主题 */
+body.night-mode {
+    background-color: #1a1a2e;
+    color: #e6e6e6;
+}
+
+body.night-mode .layui-body {
+    background-color: #1a1a2e;
+}
+
+body.night-mode .top-controls-bar {
+    background-color: #272741;
+    border-color: #333355;
+}
+
+body.night-mode .page-select {
+    background-color: #2c2c4a;
+    color: #e6e6e6;
+    border-color: #3e3e5e;
+}
+
+body.night-mode .notice-tag {
+    background-color: #272741;
+    color: #e6e6e6;
+}
+
+body.night-mode .search-container input {
+    background-color: #2c2c4a;
+    color: #e6e6e6;
+    border-color: #3e3e5e;
+}
+
+body.night-mode .user-info-container {
+    background-color: #272741;
+    border-color: #333355;
+}
+
+body.night-mode .user-name {
+    color: #e6e6e6;
+}
+
+body.night-mode .layui-table {
+    background-color: #1f1f3a;
+    color: #e6e6e6;
+}
+
+body.night-mode .layui-table td {
+    border-color: #333355;
+}
+
+body.night-mode .layui-table tbody tr:hover {
+    background-color: #292952;
+}
+
+body.night-mode .layui-footer {
+    background-color: #1f1f3a;
+    color: #999;
+    border-top: 1px solid #333355;
+}
+
+body.night-mode .header-panel {
+    background: linear-gradient(135deg, #483285, #5c4199);
+}
+
+body.night-mode .relative-item-modal,
+body.night-mode .app-item-modal {
+    background-color: #272741;
+    color: #e6e6e6;
+}
+
+body.night-mode .modal-content,
+body.night-mode .remark-modal-content {
+    background-color: #1f1f3a;
+    color: #e6e6e6;
+}
+
+body.night-mode .modal-body,
+body.night-mode .remark-modal-body {
+    background-color: #1f1f3a;
+    color: #e6e6e6;
+}
+
+body.night-mode .remark-textarea {
+    background-color: #2c2c4a;
+    color: #e6e6e6;
+    border-color: #3e3e5e;
+}
+
+body.night-mode .edit-remark {
+    background-color: #272741;
+    color: #e6e6e6;
+}
+
+body.night-mode .layui-layer-content {
+    background-color: #1f1f3a;
+    color: #e6e6e6;
+}
+
+body.night-mode .pagination > li > a,
+body.night-mode .pagination > li > span {
+    background-color: #272741;
+    color: #e6e6e6;
+}
+
+body.night-mode .pagination-info {
+    background-color: #272741;
+    color: #e6e6e6;
+}
+
+body.night-mode .stat-card {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+body.night-mode .mode-label {
+    color: #e6e6e6;
+}
+
+body.night-mode .batch-actions {
+    background-color: #1f1f3a;
+    border-color: #333355;
+}
+
+body.night-mode .layui-side-menu {
+    background-color: #151521;
+}
+
+body.night-mode .layui-nav-tree .layui-nav-item a {
+    background-color: rgba(40, 40, 60, 0.5);
+}
+
+body.night-mode .layui-nav-tree .layui-nav-item a:hover {
+    background-color: #252540;
+}
+
+body.night-mode .function-btn.blue, 
+body.night-mode .social-cmd-btn, 
+body.night-mode .app-function-new {
+    opacity: 0.9;
+}
+
+/* 夜间模式下APP列表颜色调整 */
+body.night-mode .app-item {
+    color: #e0e0e0;
+}
+
+body.night-mode .app-item i {
+    color: #78b9ff;
+}
+
+body.night-mode .app-list-container .app-item:not(.bank-app) i,
+body.night-mode .apps-list-modal .app-item:not(.bank-app) i {
+    color: #78b9ff;
+}
+
+/* 夜间模式下亲友关系列颜色调整 */
+body.night-mode .relative-item {
+    color: #e0e0e0;
+}
+
+body.night-mode .relative-item i {
+    color: #b388ff;
+}
+
+body.night-mode .relative-name {
+    color: #fff;
+}
+
+body.night-mode .relative-phone {
+    color: #b0b0b0;
+}
+
+body.night-mode .expand-relatives-btn,
+body.night-mode .expand-apps-btn {
+    color: #78b9ff;
+}
+
+body.night-mode .expand-relatives-btn i,
+body.night-mode .expand-apps-btn i {
+    color: #78b9ff;
+}
+
+/* 夜间模式下搜索框样式调整 */
+body.night-mode .search-container input::placeholder {
+    color: #a0a0a0;
+}
+
+/* iframe弹窗夜间模式适配 */
+/* 短信记录页面 */
+.night-mode .top-stats {
+    background-color: #1f1f3a;
+    border-color: #333355;
+}
+
+.night-mode .stats-left {
+    background-color: #272741;
+    color: #e0e0e0;
+}
+
+.night-mode .stats-left .fa {
+    color: #b388ff;
+}
+
+.night-mode .layui-table thead tr th {
+    background-color: #272741 !important;
+    color: #ffffff !important;
+    border-color: #333355 !important;
+}
+
+.night-mode .layui-table tbody tr td {
+    color: #e0e0e0 !important;
+    border-color: #333355 !important;
+}
+
+.night-mode .layui-table tbody tr td:nth-child(2) {
+    color: #c9d1ff !important;
+}
+
+.night-mode .page-div {
+    background-color: #1f1f3a;
+}
+
+.night-mode .layui-laypage a, 
+.night-mode .layui-laypage span {
+    background-color: #272741;
+    color: #e0e0e0;
+}
+
+.night-mode .layui-laypage .layui-laypage-curr .layui-laypage-em {
+    background-color: #6f42c1;
+}
+
+.night-mode .layui-laypage input, 
+.night-mode .layui-laypage select {
+    background-color: #2c2c4a;
+    color: #e0e0e0;
+    border-color: #3e3e5e;
+}
+
+.night-mode .empty-tip {
+    color: #a0a0a0;
+}
+
+.night-mode .empty-tip i {
+    color: #4a4a6a;
+}
+
+/* 通讯录弹窗页面 */
+.night-mode .tplay-body-div {
+    background-color: #1a1a2e;
+}
+
+.night-mode .filter-panel {
+    background-color: #1f1f3a;
+    border-color: #333355;
+}
+
+.night-mode .filter-input, 
+.night-mode .filter-select {
+    background-color: #2c2c4a;
+    color: #e0e0e0;
+    border-color: #3e3e5e;
+}
+
+.night-mode .filter-input::placeholder {
+    color: #a0a0a0;
+}
+
+.night-mode .contact-cell {
+    background-color: #272741;
+    border-color: #333355;
+}
+
+.night-mode .contact-name {
+    color: #ffffff;
+}
+
+.night-mode .contact-phone {
+    color: #b0b0b0;
+}
+
+.night-mode .contact-extra {
+    color: #9d9dbd;
+}
+
+.night-mode .contact-cell .fa {
+    color: #78b9ff;
+}
+
+.night-mode .filter-tag {
+    background-color: #272741;
+    color: #e0e0e0;
+}
+
+.night-mode .filter-tag .fa {
+    color: #b388ff;
+}
+
+.night-mode .export-btn,
+.night-mode .action-btn:not([disabled]) {
+    opacity: 0.9;
+}
+
+/* 确保夜间模式下弹窗内容可见 */
+.night-mode .layui-layer {
+    background-color: #1f1f3a;
+}
+
+.night-mode .layui-layer-title {
+    background-color: #272741;
+    color: #ffffff;
+    border-color: #333355;
+}
+
+.night-mode .layui-layer-dialog .layui-layer-content {
+    background-color: #1f1f3a;
+    color: #e0e0e0;
+}
+
+.night-mode .confirm-title {
+    color: #ffffff;
+}
+
+.night-mode .confirm-desc {
+    color: #b0b0b0;
+}
+
+.night-mode .confirm-icon {
+    background-color: rgba(255, 77, 79, 0.2);
+}
+
+.night-mode .status-toast {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 备注区域夜间模式优化 - 增强版 */
+body.night-mode .remark-info {
+    background-color: rgba(139, 92, 246, 0.15);
+    color: #e2e2ff;
+    padding: 8px 12px;
+    border-left: 3px solid #6f42c1;
+    box-shadow: 0 2px 6px rgba(70, 50, 120, 0.25);
+    border: 1px solid #3e3e5e;
+    border-radius: 6px;
+}
+
+body.night-mode .remark-info i {
+    color: #b69eff;
+    font-size: 15px;
+}
+
+body.night-mode .remark-info span {
+    color: #dcdcff;
+    font-weight: 500;
+}
+
+body.night-mode .edit-remark {
+    background-color: rgba(70, 50, 120, 0.25);
+    color: #dcdcff;
+    border-radius: 6px;
+    padding: 10px 12px;
+    border-left: 3px solid #6f42c1;
+    border: 1px solid #3e3e5e;
+    box-shadow: 0 2px 6px rgba(70, 50, 120, 0.25);
+    transition: all 0.3s ease;
+}
+
+body.night-mode .edit-remark i {
+    color: #b69eff;
+    font-size: 15px;
+}
+
+body.night-mode .edit-remark span {
+    color: #dcdcff;
+    font-weight: 500;
+}
+
+body.night-mode .edit-remark:hover {
+    background-color: rgba(90, 65, 150, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(70, 50, 120, 0.3);
+}
+
+/* 备注弹窗样式优化 */
+body.night-mode #remarkModal {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+body.night-mode .remark-modal-header {
+    background: linear-gradient(135deg, #6f42c1, #8b5cf6);
+}
+
+body.night-mode .remark-modal-content {
+    background-color: #1f1f3a;
+    color: #e6e6e6;
+    border: 1px solid #3e3e5e;
+}
+
+body.night-mode .remark-textarea {
+    background-color: #2c2c4a !important;
+    color: #e6e6e6 !important;
+    border: 1px solid #3e3e5e !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.night-mode .remark-textarea:focus {
+    border-color: #6f42c1 !important;
+    box-shadow: 0 0 0 2px rgba(111, 66, 193, 0.25) !important;
+}
+
+body.night-mode .remark-save-btn {
+    background: linear-gradient(135deg, #6f42c1, #8b5cf6);
+}
+
+body.night-mode .remark-save-btn:hover {
+    background: linear-gradient(135deg, #835acb, #9c78d9);
+    box-shadow: 0 4px 10px rgba(111, 66, 193, 0.3);
+}
+
+/* 通用编辑备注样式 - 用于日间模式 */
+.edit-remark {
+    background-color: #f5f5f5;
+    color: #333;
+    border-radius: 6px;
+    padding: 10px 12px;
+    border-left: 3px solid #8b5cf6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.edit-remark i {
+    color: #8b5cf6;
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+.edit-remark span {
+    color: #333;
+    font-weight: 500;
+}
+
+.edit-remark:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* 夜间模式下编辑备注按钮样式 */
+body.night-mode .edit-remark {
+    background-color: rgba(70, 50, 120, 0.25);
+    color: #dcdcff;
+    border-radius: 6px;
+    padding: 10px 12px;
+    border-left: 3px solid #6f42c1;
+    border: 1px solid #3e3e5e;
+    box-shadow: 0 2px 6px rgba(70, 50, 120, 0.25);
+    transition: all 0.3s ease;
+}
+
+body.night-mode .edit-remark i {
+    color: #b69eff;
+    font-size: 15px;
+}
+
+body.night-mode .edit-remark span {
+    color: #dcdcff;
+    font-weight: 500;
+}
+
+body.night-mode .edit-remark:hover {
+    background-color: rgba(90, 65, 150, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(70, 50, 120, 0.3);
+}
+
+body.night-mode .remark-modal-content {
+    background-color: #1f1f3a !important;
+    border: 1px solid #3e3e5e !important;
+}
+
+body.night-mode #remarkModal {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+} 

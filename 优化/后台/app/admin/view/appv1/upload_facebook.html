@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>视频上传到Facebook</title>
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <style>
+        body {
+            background-color: #f5f7fa;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+        }
+        
+        #layer-out {
+            max-width: 1000px;
+            margin: 20px auto;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+            border-radius: 4px;
+            padding: 30px;
+        }
+        
+        .page-title {
+            line-height: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+        
+        .dxqf-view {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .main-content {
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .el-table {
+            margin-bottom: 20px;
+        }
+        
+        .upload-section {
+            display: flex;
+            flex-flow: column nowrap;
+            margin-bottom: 20px;
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-label {
+            line-height: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .layui-upload {
+            margin-top: 10px;
+        }
+        
+        .layui-btn {
+            background-color: #3f8ef7;
+        }
+        
+        .layui-upload-list {
+            margin-top: 15px;
+        }
+        
+        video {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .el-textarea {
+            position: relative;
+        }
+        
+        .el-input--medium {
+            font-size: 14px;
+        }
+        
+        .el-textarea__inner {
+            display: block;
+            resize: vertical;
+            padding: 12px 15px;
+            line-height: 1.5;
+            box-sizing: border-box;
+            width: 100%;
+            font-size: 14px;
+            color: #606266;
+            background-color: #FFF;
+            border: 1px solid #DCDFE6;
+            border-radius: 4px;
+            transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        }
+        
+        .el-textarea__inner:focus {
+            outline: none;
+            border-color: #3f8ef7;
+        }
+        
+        .el-input__count {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            font-size: 12px;
+            color: #909399;
+            background: transparent;
+        }
+        
+        .button-group {
+            text-align: center;
+            padding: 20px 10px;
+        }
+        
+        .el-button {
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            background: #FFF;
+            border: 1px solid #DCDFE6;
+            color: #606266;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            margin: 0 8px;
+            transition: .1s;
+            font-weight: 500;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        
+        .el-button--primary {
+            color: #FFF;
+            background-color: #3f8ef7;
+            border-color: #3f8ef7;
+        }
+        
+        .status-line {
+            border-top: 1px solid #e3ebf6;
+            padding-top: 10px;
+            margin-top: 20px;
+            height: 40px;
+            line-height: 40px;
+            color: #606266;
+            font-size: 14px;
+        }
+        
+        .status-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 2px;
+        }
+        
+        .layui-upload-file {
+            display: none;
+        }
+        
+        /* 现代化美化 */
+        .modern-shadow {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .modern-shadow:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .animated-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .animated-button:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .animated-button:hover {
+            transform: scale(1.02);
+        }
+        
+        .animated-button:hover:after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="layer-out" class="el-dialog__body modern-shadow">
+    <div class="page-title">
+        视频上传到Facebook
+    </div>
+    <div class="dxqf-view">
+        <div class="main-content">
+            <div class="el-table el-table--fit el-table--enable-row-hover el-table--medium">
+                <div class="hidden-columns">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                
+                <div class="upload-section modern-shadow">
+                    <label class="section-label">添加视频封面</label>
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn animated-button" id="test1">
+                            <i class="layui-icon">&#xe67c;</i>上传图片
+                        </button>
+                        <input class="layui-upload-file" type="file" accept="image/*" name="file">
+                        <div class="layui-upload-list" style="margin-top: 10px;">
+                            <img class="layui-upload-img" id="demo1" style="max-width: 300px; max-height: 200px; display: none;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="upload-section modern-shadow">
+                    <label class="section-label">上传视频</label>
+                    <div class="layui-col-sm6">
+                        <div class="layui-btn-container">
+                            <button type="button" class="layui-btn animated-button" id="test2">
+                                <i class="layui-icon">&#xe67c;</i>上传视频
+                            </button>
+                        </div>
+                        <div class="layui-upload-list">
+                            <video controls="controls" width="100%" height="300px" id="demo2" style="display: none;"></video>
+                            <p id="demoText"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="upload-section modern-shadow">
+                    <label class="section-label">视频标题</label>
+                    <div class="el-textarea el-input--medium" style="height: 40px;">
+                        <textarea autocomplete="off" placeholder="视频标题" maxlength="200" class="el-textarea__inner" style="height: 34px;"></textarea>
+                    </div>
+                </div>
+                
+                <div class="upload-section modern-shadow">
+                    <label class="section-label">编辑视频内容</label>
+                    <div class="el-textarea el-input--medium" style="height: 200px;">
+                        <textarea autocomplete="off" placeholder="编辑视频内容" maxlength="200" class="el-textarea__inner" style="min-height: 150px;"></textarea>
+                        <span class="el-input__count">0/200</span>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="el-button el-button--primary el-button--medium animated-button send-sms1">
+                        <span>开始上传</span>
+                    </button>
+                    <button type="button" class="el-button el-button--primary el-button--medium animated-button send-sms">
+                        <span>定时上传</span>
+                    </button>
+                </div>
+                
+                <div class="status-line">
+                    线路：优酷视频：<span class="status-dot" style="background-color: rgb(235, 171, 0);"></span>
+                    腾讯视频：<span class="status-dot" style="background-color: rgb(6, 245, 0);"></span>
+                    芒果视频：<span class="status-dot" style="background-color: green;"></span>
+                    土豆视频：<span class="status-dot" style="background-color: rgb(235, 171, 0);"></span>
+                    腾讯微视：<span class="status-dot" style="background-color: red;"></span>
+                    抖音：<span class="status-dot" style="background-color: rgb(235, 171, 0);"></span>
+                    快手：<span class="status-dot" style="background-color: rgb(235, 171, 0);"></span>
+                    YouTube：<span class="status-dot" style="background-color: rgb(235, 171, 0);"></span>
+                    TikTok：<span class="status-dot" style="background-color: rgb(6, 245, 0);"></span>
+                    Facebook：<span class="status-dot" style="background-color: #3f8ef7;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="__PUBLIC__/jquery/jquery.min.js"></script>
+<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['upload', 'element', 'layer'], function() {
+        var $ = layui.jquery,
+            upload = layui.upload,
+            element = layui.element,
+            layer = layui.layer;
+
+        // 普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1',
+            url: '{:url("admin/common/upload")}', // 实际使用时请更换为您自己的上传接口
+            before: function(obj) {
+                // 预读本地文件
+                obj.preview(function(index, file, result) {
+                    $('#demo1').attr('src', result).show(); // 图片链接（base64）
+                });
+
+                element.progress('demo', '0%'); // 进度条复位
+                layer.msg('上传中', {
+                    icon: 16,
+                    time: 0
+                });
+            },
+            done: function(res) {
+                layer.closeAll('loading');
+                // 如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                // 上传成功
+                layer.msg('上传成功', {icon: 1});
+            },
+            error: function() {
+                layer.closeAll('loading');
+                // 演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function() {
+                    uploadInst.upload();
+                });
+            },
+            // 进度条
+            progress: function(n, elem, e) {
+                element.progress('demo', n + '%'); // 可配合 layui 进度条元素使用
+                if (n == 100) {
+                    layer.msg('处理中...', {icon: 16, time: 0});
+                }
+            }
+        });
+
+        // 视频上传
+        upload.render({
+            elem: '#test2',
+            url: '{:url("admin/common/upload_video")}', // 实际使用时请更换为您自己的上传接口
+            accept: 'video', // 视频
+            exts: 'mp4|flv|avi|rmvb|wmv', // 允许上传的视频格式
+            size: 100*1024, // 限制文件大小，单位 KB
+            before: function(obj) {
+                // 预读本地文件
+                obj.preview(function(index, file, result) {
+                    $('#demo2').attr('src', result).show(); // 视频链接（base64）
+                });
+            
+                element.progress('demo', '0%'); // 进度条复位
+                layer.msg('上传中', {
+                    icon: 16,
+                    time: 0
+                });
+            },
+            done: function(res) {
+                layer.closeAll('loading');
+                // 如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                // 上传成功
+                layer.msg('上传成功', {icon: 1});
+            },
+            error: function() {
+                layer.closeAll('loading');
+                // 演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function() {
+                    uploadInst.upload();
+                });
+            }
+        });
+        
+        // 字符计数
+        $('.el-textarea__inner').on('input propertychange', function() {
+            var text = $(this).val();
+            var count = text.length;
+            $(this).siblings('.el-input__count').text(count + '/200');
+        });
+        
+        // 按钮点击事件
+        $('.send-sms').click(function() {
+            layer.open({
+                title: '信息',
+                content: '已经设置定时发送！'
+            });
+        });
+        
+        $('.send-sms1').click(function() {
+            layer.open({
+                title: '信息',
+                content: '已设置上传成功！'
+            });
+        });
+    });
+</script>
+</body>
+</html> 

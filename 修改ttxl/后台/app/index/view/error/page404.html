@@ -1,0 +1,1297 @@
+<!--
+yuanlei
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>通讯录系统</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #000428, #004e92);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            perspective: 1000px;
+            animation: bgPulse 20s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { background: linear-gradient(45deg, #000428, #004e92); }
+            50% { background: linear-gradient(45deg, #000428, #001f3f); }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            transform-style: preserve-3d;
+            animation: rotateStars 400s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes rotateStars {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite;
+            opacity: 0;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            filter: blur(0.5px);
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+            animation: shooting var(--duration) linear infinite;
+            opacity: 0;
+            filter: blur(1px);
+        }
+
+        .shooting-star::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(3px);
+            animation: shootingAfter var(--duration) linear infinite;
+        }
+
+        @keyframes shootingAfter {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes shooting {
+            0% {
+                transform: translateX(0) translateY(0) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(1000px) translateY(1000px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .welcome-text {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 36px;
+            text-align: center;
+            z-index: 1001;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5),
+                         0 0 20px rgba(255,255,255,0.3),
+                         0 0 30px rgba(255,255,255,0.2),
+                         0 0 40px rgba(226, 74, 74, 0.2),
+                         0 0 50px rgba(100, 100, 255, 0.2);
+            animation: floatText 6s ease-in-out infinite, glowText 4s ease-in-out infinite;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            letter-spacing: 2px;
+        }
+
+        .welcome-text span {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInOut 5s infinite;
+            animation-delay: calc(var(--i) * 0.1s);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                         0 0 20px rgba(255, 255, 255, 0.4),
+                         0 0 30px rgba(255, 255, 255, 0.2);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+            margin: 0 2px;
+        }
+
+        .welcome-text span::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: rgba(255, 255, 255, 0.5);
+            filter: blur(8px);
+            animation: glowPulse 2s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .welcome-text span::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center,
+                rgba(255, 255, 255, 0.2) 0%,
+                transparent 70%);
+            transform: translate(-50%, -50%) scale(0);
+            animation: particleExplode 2s ease-out infinite;
+            animation-delay: calc(var(--i) * 0.1s);
+            z-index: -1;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.8) rotateX(-45deg);
+            }
+            20%, 80% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotateX(0);
+            }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes particleExplode {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatText {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0) rotateX(0) rotateY(0);
+            }
+            25% {
+                transform: translateX(-50%) translateY(-15px) rotateX(5deg) rotateY(5deg);
+            }
+            75% {
+                transform: translateX(-50%) translateY(15px) rotateX(-5deg) rotateY(-5deg);
+            }
+        }
+
+        @keyframes glowText {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255,255,255,0.5),
+                            0 0 20px rgba(255,255,255,0.3),
+                            0 0 30px rgba(255,255,255,0.2),
+                            0 0 40px rgba(226, 74, 74, 0.2),
+                            0 0 50px rgba(100, 100, 255, 0.2);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255,255,255,0.8),
+                            0 0 30px rgba(255,255,255,0.6),
+                            0 0 40px rgba(255,255,255,0.4),
+                            0 0 50px rgba(226, 74, 74,0.4),
+                            0 0 60px rgba(100, 100, 255,0.4);
+            }
+        }
+
+        .text-particles {
+            position: absolute;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .text-particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleFloat 2s ease-out infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .admin-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 1001;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            animation: pulseButton 2s infinite, glowButton 3s infinite;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-link::before {
+            content: '✉';
+            font-size: 16px;
+        }
+
+        .admin-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes pulseButton {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes glowButton {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+            50% { box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+        }
+
+        .moon {
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #fff, #f0f0f0);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+            z-index: 1;
+            animation: moonGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes moonGlow {
+            0%, 100% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.5); }
+            50% { box-shadow: 0 0 70px rgba(255, 255, 255, 0.8); }
+        }
+
+        .moon::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            animation: moonShadow 4s ease-in-out infinite;
+        }
+
+        @keyframes moonShadow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleFloat var(--duration) linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: screen;
+        }
+
+        .cursor-follower::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: pulseCursor 2s infinite;
+        }
+
+        @keyframes pulseCursor {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.2; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+        }
+
+        .draggable {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            cursor: move;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .draggable:hover {
+            transform: scale(1.1);
+        }
+
+        .glow {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: screen;
+            animation: glowPulse 4s infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 0.3; }
+        }
+
+        .wave {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0.1) 0%,
+                rgba(255,255,255,0.2) 50%,
+                rgba(255,255,255,0.1) 100%);
+            transform-origin: bottom;
+            animation: waveAnimation 10s infinite;
+            z-index: 0;
+        }
+
+        @keyframes waveAnimation {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.5); }
+        }
+
+        .light-spot {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: screen;
+            animation: spotMove 20s infinite;
+        }
+
+        @keyframes spotMove {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(100vw, 50vh); }
+            50% { transform: translate(50vw, 100vh); }
+            75% { transform: translate(-50vw, 50vh); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .planet {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--planet-color), var(--planet-color-dark));
+            box-shadow: inset -25px -25px 40px rgba(0,0,0,.5);
+            z-index: 2;
+            animation: planetRotate var(--rotation-speed) linear infinite;
+        }
+
+        .planet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, 
+                rgba(255,255,255,0.2) 0%,
+                rgba(255,255,255,0.1) 20%,
+                transparent 60%);
+        }
+
+        .planet-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            transform: rotateX(75deg);
+            animation: ringRotate var(--ring-speed) linear infinite;
+        }
+
+        @keyframes planetRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes ringRotate {
+            from { transform: rotateX(75deg) rotate(0deg); }
+            to { transform: rotateX(75deg) rotate(360deg); }
+        }
+
+        .asteroid-belt {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: beltRotate 60s linear infinite;
+        }
+
+        .asteroid {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: asteroidRotate var(--asteroid-speed) linear infinite;
+        }
+
+        @keyframes beltRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes asteroidRotate {
+            from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+        }
+
+        .comet {
+            position: fixed;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,1) 50%,
+                rgba(255,255,255,0) 100%);
+            transform-origin: left center;
+            animation: cometMove var(--comet-speed) linear infinite;
+            filter: blur(1px);
+        }
+
+        .comet::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(3px);
+            animation: cometTail var(--comet-speed) linear infinite;
+        }
+
+        @keyframes cometMove {
+            0% {
+                transform: translate(0, 0) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100vw, 100vh) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes cometTail {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        .nebula {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at center,
+                rgba(255,255,255,0.1) 0%,
+                rgba(255,255,255,0.05) 30%,
+                transparent 70%);
+            border-radius: 50%;
+            filter: blur(20px);
+            mix-blend-mode: screen;
+            animation: nebulaPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes nebulaPulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .galaxy {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center,
+                rgba(255,255,255,0.1) 0%,
+                rgba(255,255,255,0.05) 30%,
+                transparent 70%);
+            transform: rotate(45deg);
+            animation: galaxyRotate 200s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .galaxy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: galaxyGlow 10s ease-in-out infinite;
+        }
+
+        @keyframes galaxyRotate {
+            from { transform: rotate(45deg); }
+            to { transform: rotate(405deg); }
+        }
+
+        @keyframes galaxyGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .mars {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%,
+                #e24a4a,
+                #822c2c);
+            border-radius: 50%;
+            box-shadow: 
+                inset -25px -25px 40px rgba(0,0,0,.5),
+                0 0 20px rgba(226, 74, 74, 0.3);
+            z-index: 2;
+            animation: marsRotate 24s linear infinite;
+        }
+
+        .mars::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 30% 30%, 
+                    rgba(255,255,255,0.2) 0%,
+                    rgba(255,255,255,0.1) 20%,
+                    transparent 60%),
+                linear-gradient(45deg,
+                    transparent 0%,
+                    rgba(226, 74, 74, 0.3) 50%,
+                    transparent 100%);
+        }
+
+        .mars-crater {
+            position: absolute;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50%;
+            animation: craterGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes marsRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes craterGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+        }
+
+        .mars-orbit {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border: 1px solid rgba(226, 74, 74, 0.1);
+            border-radius: 50%;
+            animation: orbitRotate 100s linear infinite;
+        }
+
+        @keyframes orbitRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .mars-moon {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(255,255,255,0.5);
+            animation: moonOrbit 10s linear infinite;
+        }
+
+        @keyframes moonOrbit {
+            from { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
+        }
+
+        .black-hole {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at center,
+                #000 0%,
+                #000 40%,
+                transparent 70%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 50px rgba(0,0,0,0.8),
+                inset 0 0 50px rgba(0,0,0,0.8);
+            z-index: 3;
+            animation: blackHolePulse 4s ease-in-out infinite;
+            filter: blur(2px);
+            mix-blend-mode: screen;
+        }
+
+        .black-hole::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(255,255,255,0.1) 90deg,
+                transparent 180deg,
+                rgba(255,255,255,0.1) 270deg,
+                transparent 360deg
+            );
+            transform: translate(-50%, -50%);
+            animation: blackHoleRotate 10s linear infinite;
+        }
+
+        @keyframes blackHolePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes blackHoleRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .supernova {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at center,
+                rgba(255,255,255,1) 0%,
+                rgba(255,200,0,0.8) 20%,
+                rgba(255,100,0,0.6) 40%,
+                rgba(255,0,0,0.4) 60%,
+                transparent 80%);
+            border-radius: 50%;
+            filter: blur(15px);
+            mix-blend-mode: screen;
+            animation: supernovaExplode 5s ease-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes supernovaExplode {
+            0% { transform: scale(0); opacity: 0; }
+            20% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        .nebula-enhanced {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: 
+                radial-gradient(circle at 30% 30%,
+                    rgba(255,100,255,0.2) 0%,
+                    rgba(100,100,255,0.1) 30%,
+                    transparent 70%),
+                radial-gradient(circle at 70% 70%,
+                    rgba(255,200,100,0.2) 0%,
+                    rgba(255,100,100,0.1) 30%,
+                    transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            mix-blend-mode: screen;
+            animation: nebulaPulse 15s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes nebulaPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.5; }
+        }
+
+        .cosmic-dust {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .dust-particle {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: dustFloat var(--duration) linear infinite;
+        }
+
+        @keyframes dustFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .energy-wave {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .wave {
+            position: absolute;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: waveExpand 4s ease-out infinite;
+        }
+
+        @keyframes waveExpand {
+            0% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15;
+            mix-blend-mode: screen;
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            width: 20px;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            line-height: 20px;
+            text-shadow: 0 0 8px #0f0, 0 0 15px #0f0;
+            filter: blur(0.5px);
+            animation: matrixRain var(--duration) linear infinite;
+            animation-delay: var(--delay);
+        }
+
+        .matrix-column::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(0, 255, 0, 0.2) 0%,
+                transparent 100%);
+            filter: blur(5px);
+        }
+
+        @keyframes matrixRain {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .matrix-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center,
+                rgba(0, 255, 0, 0.1) 0%,
+                transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: matrixGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes matrixGlow {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.1);
+            }
+        }
+
+        .global-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center,
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: globalGlow 10s ease-in-out infinite;
+        }
+
+        @keyframes globalGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="global-glow"></div>
+    <div class="cursor-follower"></div>
+    <div class="draggable"></div>
+    <div class="glow"></div>
+    <div class="wave"></div>
+    <div class="light-spot"></div>
+    <div class="stars" id="stars"></div>
+    <div class="particles" id="particles"></div>
+    <div class="moon"></div>
+
+    <h1 class="welcome-text">
+        <span style="--i:1">欢</span>
+        <span style="--i:2">迎</span>
+        <span style="--i:3">使</span>
+        <span style="--i:4">用</span>
+        <span style="--i:5">相</span>
+        <span style="--i:6">遇</span>
+        <span style="--i:7">通</span>
+        <span style="--i:8">讯</span>
+        <span style="--i:9">录</span>
+        <span style="--i:11">统</span>
+    
+    </h1>
+
+    <a href="#" class="admin-link" target="_blank">联系作者</a>
+
+    <div class="planet" style="--planet-color: #4a90e2; --planet-color-dark: #2c5282; --rotation-speed: 20s; width: 100px; height: 100px; top: 20%; left: 20%;"></div>
+    <div class="planet" style="--planet-color: #e24a4a; --planet-color-dark: #822c2c; --rotation-speed: 30s; width: 60px; height: 60px; top: 60%; left: 80%;">
+        <div class="planet-ring" style="--ring-speed: 15s; width: 120px; height: 120px; top: -30px; left: -30px;"></div>
+    </div>
+    <div class="asteroid-belt" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+    <div class="comet" style="--comet-speed: 5s;"></div>
+    <div class="nebula" style="top: 30%; left: 70%;"></div>
+    <div class="galaxy"></div>
+    <div class="mars-orbit" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="mars" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        <div class="mars-moon"></div>
+    </div>
+    <div class="black-hole" style="top: 30%; right: 20%;"></div>
+    <div class="supernova" style="bottom: 30%; left: 30%;"></div>
+    <div class="nebula-enhanced" style="top: 40%; right: 30%;"></div>
+    <div class="cosmic-dust"></div>
+    <div class="energy-wave"></div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 200;
+            const shootingStarCount = 5;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+                star.style.transform = `translateZ(${Math.random() * 1000}px)`;
+                starsContainer.appendChild(star);
+            }
+
+            for (let i = 0; i < shootingStarCount; i++) {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                shootingStar.style.left = `${Math.random() * 100}%`;
+                shootingStar.style.top = `${Math.random() * 50}%`;
+                shootingStar.style.setProperty('--duration', `${Math.random() * 2 + 1}s`);
+                starsContainer.appendChild(shootingStar);
+            }
+        }
+
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 100;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.width = `${Math.random() * 4}px`;
+                particle.style.height = particle.style.width;
+                particle.style.setProperty('--duration', `${Math.random() * 10 + 10}s`);
+                particle.style.filter = `blur(${Math.random() * 2}px)`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        const cursor = document.querySelector('.cursor-follower');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        const draggable = document.querySelector('.draggable');
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        draggable.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+
+        function dragStart(e) {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+
+            if (e.target === draggable) {
+                isDragging = true;
+            }
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+
+                xOffset = currentX;
+                yOffset = currentY;
+
+                setTranslate(currentX, currentY, draggable);
+            }
+        }
+
+        function setTranslate(xPos, yPos, el) {
+            el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+        }
+
+        function dragEnd(e) {
+            initialX = currentX;
+            initialY = currentY;
+            isDragging = false;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const glow = document.querySelector('.glow');
+            glow.style.left = e.clientX - 100 + 'px';
+            glow.style.top = e.clientY - 100 + 'px';
+        });
+
+        function createAsteroidBelt() {
+            const belt = document.querySelector('.asteroid-belt');
+            const asteroidCount = 50;
+
+            for (let i = 0; i < asteroidCount; i++) {
+                const asteroid = document.createElement('div');
+                asteroid.className = 'asteroid';
+                asteroid.style.setProperty('--asteroid-speed', `${Math.random() * 20 + 10}s`);
+                asteroid.style.transform = `rotate(${Math.random() * 360}deg) translateX(150px)`;
+                belt.appendChild(asteroid);
+            }
+        }
+
+        function createComet() {
+            const comet = document.querySelector('.comet');
+            comet.style.top = `${Math.random() * 50}%`;
+            comet.style.left = `${Math.random() * 50}%`;
+        }
+
+        function createNebula() {
+            const nebula = document.querySelector('.nebula');
+            nebula.style.background = `radial-gradient(circle at center,
+                rgba(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255},0.1) 0%,
+                rgba(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255},0.05) 30%,
+                transparent 70%)`;
+        }
+
+        function createMarsCraters() {
+            const mars = document.querySelector('.mars');
+            const craterCount = 8;
+
+            for (let i = 0; i < craterCount; i++) {
+                const crater = document.createElement('div');
+                crater.className = 'mars-crater';
+                crater.style.width = `${Math.random() * 15 + 5}px`;
+                crater.style.height = crater.style.width;
+                crater.style.top = `${Math.random() * 100}%`;
+                crater.style.left = `${Math.random() * 100}%`;
+                crater.style.animationDelay = `${Math.random() * 4}s`;
+                mars.appendChild(crater);
+            }
+        }
+
+        function createMarsMoon() {
+            const moon = document.querySelector('.mars-moon');
+            moon.style.setProperty('--moon-speed', `${Math.random() * 5 + 5}s`);
+        }
+
+        function createCosmicDust() {
+            const container = document.querySelector('.cosmic-dust');
+            const particleCount = 100;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'dust-particle';
+                particle.style.width = `${Math.random() * 3}px`;
+                particle.style.height = particle.style.width;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.setProperty('--duration', `${Math.random() * 20 + 10}s`);
+                particle.style.setProperty('--x', `${Math.random() * 200 - 100}px`);
+                particle.style.setProperty('--y', `${Math.random() * 200 - 100}px`);
+                container.appendChild(particle);
+            }
+        }
+
+        function createEnergyWaves() {
+            const container = document.querySelector('.energy-wave');
+            const waveCount = 3;
+
+            for (let i = 0; i < waveCount; i++) {
+                const wave = document.createElement('div');
+                wave.className = 'wave';
+                wave.style.width = '100px';
+                wave.style.height = '100px';
+                wave.style.left = '50%';
+                wave.style.top = '50%';
+                wave.style.transform = 'translate(-50%, -50%)';
+                wave.style.animationDelay = `${i * 1.5}s`;
+                container.appendChild(wave);
+            }
+        }
+
+        function createTextParticles() {
+            const welcomeText = document.querySelector('.welcome-text');
+            const particlesContainer = document.createElement('div');
+            particlesContainer.className = 'text-particles';
+            document.body.appendChild(particlesContainer);
+
+            welcomeText.addEventListener('mousemove', (e) => {
+                const rect = welcomeText.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                for (let i = 0; i < 5; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'text-particle';
+                    particle.style.width = `${Math.random() * 4 + 2}px`;
+                    particle.style.height = particle.style.width;
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+                    particle.style.setProperty('--x', `${(Math.random() - 0.5) * 100}px`);
+                    particle.style.setProperty('--y', `${(Math.random() - 0.5) * 100}px`);
+                    particlesContainer.appendChild(particle);
+
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 2000);
+                }
+            });
+        }
+
+        function createMatrixRain() {
+            const container = document.createElement('div');
+            container.className = 'matrix-rain';
+            document.body.appendChild(container);
+
+            const columns = Math.floor(window.innerWidth / 20);
+            const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            const specialChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = `${i * 20}px`;
+                column.style.setProperty('--duration', `${Math.random() * 2 + 1}s`);
+                column.style.setProperty('--delay', `${Math.random() * 2}s`);
+
+                const length = Math.floor(Math.random() * 20) + 10;
+                let content = '';
+                for (let j = 0; j < length; j++) {
+                    if (Math.random() < 0.1) {
+                        content += specialChars[Math.floor(Math.random() * specialChars.length)] + '<br>';
+                    } else {
+                        content += characters[Math.floor(Math.random() * characters.length)] + '<br>';
+                    }
+                }
+                column.innerHTML = content;
+
+                container.appendChild(column);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            createStars();
+            createParticles();
+            createAsteroidBelt();
+            createComet();
+            createNebula();
+            createMarsCraters();
+            createMarsMoon();
+            createCosmicDust();
+            createEnergyWaves();
+            createTextParticles();
+            createMatrixRain();
+            
+            const draggable = document.querySelector('.draggable');
+            draggable.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+            draggable.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+        });
+
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const matrixRain = document.querySelector('.matrix-rain');
+                if (matrixRain) {
+                    matrixRain.remove();
+                    createMatrixRain();
+                }
+            }, 250);
+        });
+    </script>
+</body>
+
+</html> 

@@ -1,0 +1,1383 @@
+<?php /*a:1:{s:61:"/www/wwwroot/154.219.101.15/app/admin/view/admin/publish.html";i:1749557098;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>管理员管理</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="/static/admin/css/admin.css" media="all">
+  <style>
+    .admin-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      margin: 10px auto;
+      max-width: 100%;
+    }
+    
+    .admin-header {
+      display: flex;
+      align-items: center;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f0f0f0;
+      margin-bottom: 20px;
+    }
+    
+    .admin-header .icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: #8b5cf6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      color: white;
+      font-size: 18px;
+    }
+    
+    .admin-header .title {
+      font-size: 20px;
+      font-weight: 500;
+      color: #374151;
+    }
+    
+    .layui-form-label {
+      font-weight: 500;
+      color: #4b5563;
+      width: 100px;
+      padding: 8px 15px 8px 0;
+    }
+    
+    .layui-input-block {
+      margin-left: 120px;
+    }
+    
+    .layui-input-inline {
+      width: 240px !important;
+    }
+    
+    .layui-input, .layui-select, .layui-textarea {
+      border-radius: 4px;
+      padding: 8px 12px;
+      height: 36px;
+      line-height: 1.5;
+      border-color: #e5e7eb;
+      transition: all 0.3s;
+    }
+    
+    .layui-input:focus, .layui-select:focus, .layui-textarea:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.1);
+    }
+    
+    .layui-btn {
+      background-color: #8b5cf6;
+      border-radius: 4px;
+      padding: 0 20px;
+      height: 38px;
+      line-height: 38px;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    
+    .layui-btn:hover {
+      background-color: #7c3aed;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+    }
+    
+    .layui-btn-primary {
+      background-color: #f9fafb;
+      border-color: #e5e7eb;
+      color: #4b5563;
+    }
+    
+    .layui-btn-primary:hover {
+      background-color: #f3f4f6;
+      border-color: #d1d5db;
+      color: #374151;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    
+    .upload-container {
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .upload-preview {
+      margin-left: 15px;
+      position: relative;
+    }
+    
+    .upload-preview img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border: 2px solid #f3f4f6;
+    }
+    
+    .role-tips {
+      padding: 12px 15px;
+      background-color: #f8f9fa;
+      border-left: 4px solid #8b5cf6;
+      border-radius: 4px;
+      margin-top: 12px;
+      color: #4b5563;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    
+    .role-tips h4 {
+      margin: 0 0 8px 0;
+      color: #374151;
+      font-size: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    
+    .role-tips h4 i {
+      color: #8b5cf6;
+      margin-right: 6px;
+    }
+    
+    .role-tips p {
+      margin: 6px 0;
+    }
+    
+    .role-tips code {
+      background-color: #e9ecef;
+      padding: 2px 5px;
+      border-radius: 3px;
+      color: #8b5cf6;
+      font-weight: 500;
+    }
+    
+    .form-actions {
+      margin-top: 25px;
+      display: flex;
+      justify-content: flex-start;
+      padding-top: 15px;
+      border-top: 1px solid #f0f0f0;
+    }
+    
+    .form-actions .layui-btn {
+      margin-right: 12px;
+    }
+    
+    /* 自定义开关样式 */
+    .layui-form-switch {
+      height: 26px;
+      line-height: 26px;
+      min-width: 75px;
+      padding: 0 12px 0 5px;
+      margin-top: 6px;
+      border-radius: 20px;
+      background-color: #e5e7eb;
+    }
+    
+    .layui-form-switch em {
+      margin-left: 5px;
+      font-style: normal;
+      font-size: 12px;
+    }
+    
+    .layui-form-switch i {
+      width: 18px;
+      height: 18px;
+      top: 4px;
+      border-radius: 18px;
+    }
+    
+    .layui-form-switch.layui-form-onswitch {
+      background-color: #8b5cf6;
+      padding: 0 5px 0 12px;
+    }
+    
+    .layui-form-switch.layui-form-onswitch em {
+      margin-right: 5px;
+      margin-left: 0;
+    }
+    
+    .layui-form-switch.layui-form-onswitch i {
+      margin-left: -18px;
+      left: 100%;
+    }
+    
+    /* 美化下拉框样式 */
+    .layui-form-select .layui-input {
+      height: 36px;
+      border-radius: 4px;
+    }
+    
+    .layui-form-select dl {
+      top: 36px;
+      border-radius: 4px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .layui-form-select dl dd.layui-this {
+      background-color: #8b5cf6;
+    }
+    
+    /* 自定义角色图标样式 */
+    .role-icon {
+      display: inline-block;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    
+    .icon-super-admin {
+      color: #f43f5e;
+    }
+    
+    .icon-admin {
+      color: #8b5cf6;
+    }
+    
+    .icon-user {
+      color: #10b981;
+    }
+    
+    /* 面包屑导航 */
+    .admin-breadcrumb {
+      margin-bottom: 15px;
+    }
+    
+    .admin-breadcrumb a {
+      color: #6b7280;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+    
+    .admin-breadcrumb a:hover {
+      color: #8b5cf6;
+    }
+    
+    .admin-breadcrumb span {
+      color: #374151;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    .admin-breadcrumb i {
+      margin: 0 6px;
+      color: #d1d5db;
+    }
+    
+    /* 响应式调整 */
+    @media screen and (max-width: 768px) {
+      .layui-input-inline {
+        width: 100% !important;
+      }
+      
+      .layui-input-block {
+        margin-left: 100px;
+      }
+      
+      .upload-container {
+        flex-direction: column;
+      }
+      
+      .upload-preview {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+    
+    /* 邀请码输入组样式 */
+    .invite-code-input-group {
+      display: flex;
+      align-items: center;
+    }
+    
+    .invite-code-input-group .layui-input {
+      flex: 1;
+      margin-right: 8px;
+    }
+    
+    .invite-code-input-group .code-length-select {
+      width: 80px;
+      margin-right: 8px;
+    }
+    
+    .invite-code-input-group .code-length-select .layui-select {
+      height: 36px;
+    }
+    
+    .invite-code-btn {
+      border-radius: 4px;
+      height: 36px;
+      line-height: 36px;
+      background-color: #6366f1;
+      padding: 0 12px;
+      box-shadow: 0 2px 5px rgba(99, 102, 241, 0.2);
+      transition: all 0.3s;
+    }
+    
+    .invite-code-btn:hover {
+      background-color: #4f46e5;
+      box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3);
+    }
+    
+    @media screen and (max-width: 576px) {
+      .invite-code-input-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .invite-code-input-group .layui-input {
+        width: 100%;
+      }
+      
+      .invite-code-btn {
+        margin-top: 6px;
+      }
+    }
+    
+    /* 两列布局优化 */
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -10px;
+    }
+    
+    .form-col {
+      padding: 0 10px;
+      flex: 0 0 50%;
+      max-width: 50%;
+      box-sizing: border-box;
+    }
+    
+    .form-col .layui-form-label {
+      width: 90px;
+    }
+    
+    .form-col .layui-input-block {
+      margin-left: 100px;
+    }
+    
+    @media screen and (max-width: 768px) {
+      .form-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+    
+    /* 表单项间距优化 */
+    .layui-form-item {
+      margin-bottom: 15px;
+    }
+    
+    .layui-form-mid.layui-word-aux {
+      padding: 4px 0 !important;
+    }
+    
+    .layui-layer-content {
+      padding: 15px 20px;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      line-height: 1.5;
+    }
+    .layui-layer-dialog .layui-layer-content .layui-layer-ico {
+      display: none;
+    }
+    
+    /* 状态通知弹窗样式 */
+    .status-toast {
+      position: fixed;
+      top: -100px;
+      right: 20px;
+      min-width: 250px;
+      max-width: 350px;
+      background: linear-gradient(145deg, #4CAF50, #2E7D32);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      transform: translateY(0);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .status-toast.error {
+      background: linear-gradient(145deg, #f44336, #d32f2f);
+    }
+
+    .status-toast.warning {
+      background: linear-gradient(145deg, #ff9800, #ed6c02);
+    }
+
+    .status-toast.show {
+      transform: translateY(120px);
+      opacity: 1;
+    }
+
+    .status-toast-icon {
+      font-size: 24px;
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .status-toast-content {
+      flex: 1;
+    }
+
+    .status-toast-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+      display: block;
+      font-size: 16px;
+    }
+
+    .status-toast-message {
+      opacity: 0.95;
+      font-size: 14px;
+    }
+
+    .status-toast-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+    }
+
+    .status-toast-progress-bar {
+      height: 100%;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 0 0 8px 8px;
+      animation: toast-progress 3s linear forwards;
+    }
+
+    @keyframes toast-progress {
+      0% {
+        width: 100%;
+      }
+      100% {
+        width: 0;
+      }
+    }
+  </style>
+</head>
+<body style="padding:15px; background-color: #f5f7fa;">
+  <div class="admin-breadcrumb">
+    <a href="<?php echo url('admin/admin/admin_list'); ?>"><i class="fa fa-users"></i> 管理员列表</a>
+    <i class="fa fa-angle-right"></i>
+    <span><?php if(empty($info['admin']) || (($info['admin'] instanceof \think\Collection || $info['admin'] instanceof \think\Paginator ) && $info['admin']->isEmpty())): ?>新增管理员<?php else: ?>编辑管理员<?php endif; ?></span>
+  </div>
+  
+  <div class="admin-container">
+    <div class="admin-header">
+      <div class="icon">
+        <i class="fa fa-user-plus"></i>
+      </div>
+      <div class="title"><?php if(empty($info['admin']) || (($info['admin'] instanceof \think\Collection || $info['admin'] instanceof \think\Paginator ) && $info['admin']->isEmpty())): ?>新增管理员<?php else: ?>编辑管理员信息<?php endif; ?></div>
+    </div>
+    
+    <?php if(!(empty($info['admin']) || (($info['admin'] instanceof \think\Collection || $info['admin'] instanceof \think\Paginator ) && $info['admin']->isEmpty()))): ?>
+    <div class="layui-alert <?php if($info['admin']['role_type'] == 'super_admin' || $info['admin']['status'] == 1): ?>layui-bg-green<?php else: ?>layui-bg-gray<?php endif; ?>" style="margin-bottom: 15px; padding: 12px; border-radius: 4px;">
+      <div style="display: flex; align-items: center;">
+        <i class="fa fa-info-circle" style="font-size: 16px; margin-right: 10px;"></i>
+        <div>
+          <div style="font-weight: bold; margin-bottom: 3px;">账号状态：<?php if($info['admin']['role_type'] == 'super_admin' || $info['admin']['status'] == 1): ?>正常<?php else: ?>已禁用<?php endif; ?></div>
+          <?php if($current_admin['role_type'] == 'super_admin' && isset($info['admin']['id']) && $info['admin']['id'] == ''): ?>
+          <div>您正在编辑超级管理员账号（自己）。部分字段受限，修改用户名后需要重新登录。</div>
+          <?php elseif($info['admin']['role_type'] == 'super_admin'): ?>
+          <div>超级管理员账号不能被禁用，始终显示为正常状态。</div>
+          <?php endif; ?>
+        </div>
+      </div>
+    </div>
+    <?php endif; ?>
+    
+    <form class="layui-form" id="admin">
+      <!-- 表单主体内容 - 改为两列布局 -->
+      <div class="form-row">
+        <div class="form-col">
+          <div class="layui-form-item">
+            <label class="layui-form-label">角色类型</label>
+            <div class="layui-input-block">
+              <select name="role_type" lay-filter="roleType" lay-verify="roleType" <?php if(isset($info['admin']) && isset($info['admin']['id']) && $info['admin']['id'] == session('admin')): ?>disabled="disabled"<?php endif; ?>>
+                <?php if($current_admin['role_type'] == 'super_admin' && (!isset($info['admin']) || !isset($info['admin']['role_type']) || $info['admin']['role_type'] == 'super_admin')): ?>
+                <option value="super_admin" <?php if(isset($info['admin']) && isset($info['admin']['role_type']) && $info['admin']['role_type'] == 'super_admin'): ?>selected<?php endif; ?>>超级管理员</option>
+                <?php endif; ?>
+                <option value="admin" <?php if(isset($info['admin']) && isset($info['admin']['role_type']) && $info['admin']['role_type'] == 'admin'): ?>selected<?php endif; ?>>普通管理员</option>
+                <option value="user" <?php if(isset($info['admin']) && isset($info['admin']['role_type']) && $info['admin']['role_type'] == 'user'): ?>selected<?php endif; ?>>普通账号</option>
+              </select>
+              <?php if(isset($info['admin']) && isset($info['admin']['id']) && $info['admin']['id'] == session('admin')): ?>
+              <div class="layui-form-mid layui-word-aux" style="color: #ff5722; padding: 4px 6px; background: #fff5f5; border-radius: 3px; margin-top: 4px; font-size: 12px;">
+                <i class="fa fa-exclamation-triangle"></i> 为了系统安全，不允许修改自己的角色类型
+              </div>
+              <!-- 添加隐藏字段 -->
+              <input type="hidden" name="original_role_type" value="<?php echo htmlentities((string) $info['admin']['role_type']); ?>">
+              <input type="hidden" name="role_type" value="<?php echo htmlentities((string) $info['admin']['role_type']); ?>">
+              <?php endif; ?>
+            </div>
+          </div>
+          
+          <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+              <input name="name" lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input" type="text" <?php if(!(empty($info['admin']['name']) || (($info['admin']['name'] instanceof \think\Collection || $info['admin']['name'] instanceof \think\Paginator ) && $info['admin']['name']->isEmpty()))): ?>value="<?php echo htmlentities((string) $info['admin']['name']); ?>"<?php endif; ?>>
+              <?php if(isset($info['admin']) && isset($info['admin']['id']) && $info['admin']['id'] == ''): ?>
+              <div class="layui-form-mid layui-word-aux" style="color: #ff7800; font-size: 12px;">修改用户名后需要重新登录</div>
+              <?php endif; ?>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">昵称</label>
+            <div class="layui-input-block">
+              <input name="nickname" lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input" type="text" <?php if(!(empty($info['admin']['nickname']) || (($info['admin']['nickname'] instanceof \think\Collection || $info['admin']['nickname'] instanceof \think\Paginator ) && $info['admin']['nickname']->isEmpty()))): ?>value="<?php echo htmlentities((string) $info['admin']['nickname']); ?>"<?php endif; ?>>
+            </div>
+          </div>
+          
+          <?php if(empty($info['admin']) || (($info['admin'] instanceof \think\Collection || $info['admin'] instanceof \think\Paginator ) && $info['admin']->isEmpty())): ?>
+          <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+              <input name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input" type="password">
+            </div>
+          </div>
+          <?php endif; ?>
+        </div>
+        
+        <div class="form-col">
+          <!-- 隐藏管理员分组，自动根据角色类型设置 -->
+          <input type="hidden" name="admin_cate_id" id="admin_cate_id" value="<?php echo htmlentities((string) (isset($info['admin']['admin_cate_id']) && ($info['admin']['admin_cate_id'] !== '')?$info['admin']['admin_cate_id']:'3')); ?>">
+          
+          <div class="layui-form-item" id="deletePermissionDiv">
+            <label class="layui-form-label">删除权限</label>
+            <div class="layui-input-block">
+              <input type="checkbox" name="can_delete_user" value="1" lay-skin="switch" lay-text="允许|禁止" <?php if(!(empty($info['admin']['can_delete_user']) || (($info['admin']['can_delete_user'] instanceof \think\Collection || $info['admin']['can_delete_user'] instanceof \think\Paginator ) && $info['admin']['can_delete_user']->isEmpty()))): if($info['admin']['can_delete_user'] == '1'): ?> checked=""<?php endif; ?><?php endif; if($current_admin['role_type'] == 'user'): ?>disabled<?php endif; ?>>
+              <?php if($current_admin['role_type'] == 'user'): ?>
+              <div class="layui-form-mid layui-word-aux" style="color: #ff5722; font-size: 12px;">普通账号不能修改删除权限</div>
+              <?php endif; ?>
+            </div>
+          </div>
+          
+          <div class="layui-form-item" id="inviteCodeDiv">
+            <label class="layui-form-label">邀请码</label>
+            <div class="layui-input-block">
+              <div class="invite-code-input-group">
+                <input name="invite_code" placeholder="请输入码" autocomplete="off" class="layui-input" type="text" maxlength="4" <?php if(!(empty($info['admin']['invite_code']) || (($info['admin']['invite_code'] instanceof \think\Collection || $info['admin']['invite_code'] instanceof \think\Paginator ) && $info['admin']['invite_code']->isEmpty()))): ?>value="<?php echo htmlentities((string) $info['admin']['invite_code']); ?>"<?php endif; if($current_admin['role_type'] == 'user'): ?>readonly<?php endif; ?>>
+                <?php if($current_admin['role_type'] == 'super_admin' || $current_admin['role_type'] == 'admin'): ?>
+                <div class="code-length-select" style="display: inline-block; margin-right: 8px;">
+                  <select name="code_length" id="codeLengthSelect" lay-filter="codeLength">
+                    <option value="2">2位</option>
+                    <option value="3">3位</option>
+                    <option value="4" selected>4位</option>
+                    <option value="5">5位</option>
+                    <option value="6">6位</option>
+                  </select>
+                </div>
+                <button type="button" class="layui-btn invite-code-btn" id="generateInviteCode">
+                  <i class="fa fa-refresh"></i> 生成
+                </button>
+                <?php endif; ?>
+              </div>
+              <?php if($current_admin['role_type'] == 'user'): ?>
+              <div class="layui-form-mid layui-word-aux" style="color: #ff5722; font-size: 12px;">普通账号不能修改邀请码</div>
+              <?php else: ?>
+              <div class="layui-form-mid layui-word-aux" style="font-size: 12px;">用于用户注册，普通账号只能查看通过自己邀请码注册的用户</div>
+              <?php endif; ?>
+            </div>
+          </div>
+          
+          <?php if(empty($info['admin']) || (($info['admin'] instanceof \think\Collection || $info['admin'] instanceof \think\Paginator ) && $info['admin']->isEmpty())): ?>
+          <div class="layui-form-item">
+            <label class="layui-form-label">确认密码</label>
+            <div class="layui-input-block">
+              <input name="password_confirm" lay-verify="pass" placeholder="请再次输入密码" autocomplete="off" class="layui-input" type="password">
+            </div>
+          </div>
+          <?php endif; ?>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">头像</label>
+            <div class="layui-input-block">
+              <div class="upload-container">
+                <button type="button" class="layui-btn" id="thumb" style="height: 36px; line-height: 36px; padding: 0 15px;">
+                  <i class="fa fa-upload"></i> 上传
+                </button>
+                <div class="upload-preview">
+                  <img class="layui-upload-img" id="demo1" src="<?php echo htmlentities((string) (isset($info['admin']['thumb']) && ($info['admin']['thumb'] !== '')?$info['admin']['thumb']:'/static/admin/images/avatar.png')); ?>">
+                </div>
+              </div>
+              <?php if(!(empty($info['admin']['thumb']) || (($info['admin']['thumb'] instanceof \think\Collection || $info['admin']['thumb'] instanceof \think\Paginator ) && $info['admin']['thumb']->isEmpty()))): ?>
+              <input type="hidden" name="thumb" value="<?php echo htmlentities((string) $info['admin']['thumb']); ?>">
+              <?php endif; ?>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 权限说明 - 全宽单列 -->
+      <div class="layui-form-item">
+        <div class="layui-input-block" style="margin-left: 0; margin-top: 5px;">
+          <div class="role-tips">
+            <h4><i class="fa fa-info-circle"></i> 三级权限体系说明</h4>
+            <p><code>超级管理员</code>：最高权限账号，不能被其他管理员修改或降级。可查看所有用户数据。</p>
+            <p><code>普通管理员</code>：可以管理其他普通管理员和普通账号，不能修改超级管理员信息。可查看所有用户数据。</p>
+            <p><code>普通账号</code>：仅能查看通过自己邀请码邀请的用户数据，删除权限可单独设置。</p>
+          </div>
+        </div>
+      </div>
+
+      <?php if(!(empty($info['admin']) || (($info['admin'] instanceof \think\Collection || $info['admin'] instanceof \think\Paginator ) && $info['admin']->isEmpty()))): ?>
+      <input type="hidden" name="id" value="<?php echo htmlentities((string) (isset($info['admin']['id']) && ($info['admin']['id'] !== '')?$info['admin']['id']:0)); ?>">
+      <!-- 添加状态信息隐藏字段 -->
+      <input type="hidden" name="status" value="<?php echo htmlentities((string) (isset($info['admin']['status']) && ($info['admin']['status'] !== '')?$info['admin']['status']:'1')); ?>">
+      <!-- 管理员数据查看权限和下级用户字段 - 仅在列表页编辑 -->
+      <?php if($current_admin['role_type'] == 'super_admin' && isset($info['admin']) && $info['admin']['role_type'] == 'admin'): ?>
+      <!-- 仅保留隐藏字段保持数据完整性 -->
+      <input type="hidden" name="view_all_invites" value="<?php echo htmlentities((string) (isset($info['admin']['view_all_invites']) && ($info['admin']['view_all_invites'] !== '')?$info['admin']['view_all_invites']:'0')); ?>">
+      <input type="hidden" name="assigned_invites" value="<?php echo htmlentities((string) (isset($info['admin']['assigned_invites']) && ($info['admin']['assigned_invites'] !== '')?$info['admin']['assigned_invites']:'')); ?>">
+      <?php endif; ?>
+      <?php endif; ?>
+      
+      <div class="form-actions">
+        <button class="layui-btn" lay-submit lay-filter="admin"><i class="fa fa-check"></i> 提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary"><i class="fa fa-refresh"></i> 重置</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- 状态通知弹窗 -->
+  <div class="status-toast" id="statusToast">
+    <div class="status-toast-icon">
+      <i class="fa fa-check-circle"></i>
+    </div>
+    <div class="status-toast-content">
+      <span class="status-toast-title">操作成功</span>
+      <span class="status-toast-message">操作已成功完成</span>
+    </div>
+    <div class="status-toast-progress">
+      <div class="status-toast-progress-bar"></div>
+    </div>
+  </div>
+
+  <script src="/static/layui/layui.js"></script>
+  <script src="/static/public/jquery/jquery.min.js"></script>
+  <script>
+  layui.use(['upload', 'layer', 'form'], function(){
+    var upload = layui.upload;
+    var layer = layui.layer;
+    var form = layui.form;
+    var $ = layui.jquery;
+    
+    // 初始化表单元素
+    form.render();
+    
+    // 检查是否是编辑自己的账号并设置严格的禁用状态
+    var isEditingSelf = "<?php echo isset($info['admin']) && isset($info['admin']['id']) && $info['admin']['id'] == session('admin') ? 'true' : 'false'; ?>" === "true";
+    
+    if(isEditingSelf) {
+      // 完全禁用角色选择
+      $('select[name=role_type]').prop('disabled', true).addClass('layui-disabled');
+      
+      // 添加表单验证规则
+      form.verify({
+        roleType: function(value) {
+          if(isEditingSelf) {
+            var originalRole = $('input[name=original_role_type]').val();
+            if(value !== originalRole) {
+              return '不允许修改自己的角色类型';
+            }
+          }
+        }
+      });
+      
+      // 强制更新表单渲染
+      form.render('select');
+      
+      // 添加事件拦截
+      $(document).on('mousedown', 'select[name=role_type]', function(e) {
+        if(isEditingSelf) {
+          e.preventDefault();
+          return false;
+        }
+      });
+    }
+    
+    // 自定义通知样式
+    var notifyConfig = {
+      success: {
+        offset: '30px',
+        anim: 2,
+        time: 2000,
+        skin: 'notify-success'
+      },
+      error: {
+        offset: '30px',
+        anim: 2,
+        time: 3000,
+        skin: 'notify-error'
+      },
+      loading: {
+        offset: '30px',
+        time: 0,
+        shade: [0.1, '#000'],
+        skin: 'notify-loading'
+      }
+    };
+    
+    // 初始化美化角色下拉框
+    function initRoleTypeSelect() {
+      // 注入图标到下拉框选项
+      setTimeout(function() {
+        // 查找已经渲染的下拉框选项
+        $('.layui-form-select dl dd').each(function() {
+          var $this = $(this);
+          var text = $this.text().trim();
+          
+          // 避免重复添加图标
+          if ($this.find('i').length > 0) return;
+          
+          // 根据文本内容添加相应图标
+          if (text === '超级管理员') {
+            $this.html('<i class="fa fa-shield role-icon icon-super-admin"></i>' + text);
+          } else if (text === '普通管理员') {
+            $this.html('<i class="fa fa-user-circle role-icon icon-admin"></i>' + text);
+          } else if (text === '普通账号') {
+            $this.html('<i class="fa fa-user role-icon icon-user"></i>' + text);
+          }
+        });
+      }, 100);
+    }
+    
+    // 监听下拉框渲染完成事件
+    $('.layui-form-item select[name=role_type]').on('mousedown', function(){
+      initRoleTypeSelect();
+    });
+    
+    // 初始触发一次
+    initRoleTypeSelect();
+    
+    // 添加自定义通知样式
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = `
+      .notify-success {
+        background-color: #10b981;
+        color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+      }
+      .notify-error {
+        background-color: #ef4444;
+        color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+      }
+      .notify-loading {
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .layui-layer-content {
+        padding: 15px 20px;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        line-height: 1.5;
+      }
+      .layui-layer-dialog .layui-layer-content .layui-layer-ico {
+        display: none;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // 状态通知弹窗函数
+    function showStatusToast(options) {
+      var $toast = $('#statusToast');
+      var icon = options.type === 'success' ? 'fa-check-circle' : 
+                 options.type === 'warning' ? 'fa-exclamation-triangle' : 'fa-times-circle';
+      var background = options.type === 'success' ? 'linear-gradient(145deg, #4CAF50, #2E7D32)' : 
+                       options.type === 'warning' ? 'linear-gradient(145deg, #ff9800, #ed6c02)' :
+                       'linear-gradient(145deg, #f44336, #d32f2f)';
+      
+      // 设置图标
+      $toast.find('.status-toast-icon i').attr('class', 'fa ' + icon);
+      
+      // 设置标题和消息
+      $toast.find('.status-toast-title').text(options.title || (options.type === 'success' ? '操作成功' : 
+                                              options.type === 'warning' ? '警告' : '操作失败'));
+      $toast.find('.status-toast-message').text(options.message);
+      
+      // 设置背景色
+      $toast.css('background', background);
+      
+      // 重置进度条动画
+      var $progressBar = $toast.find('.status-toast-progress-bar');
+      $progressBar.remove();
+      $toast.find('.status-toast-progress').append('<div class="status-toast-progress-bar"></div>');
+      
+      // 显示通知
+      $toast.addClass('show');
+      
+      // 设置自动隐藏
+      var duration = options.duration || 3000;
+      var timer = setTimeout(function() {
+        $toast.removeClass('show');
+        if (options.callback) {
+          options.callback();
+        }
+      }, duration);
+      
+      // 如果是loading类型，返回一个对象供手动关闭
+      if (options.type === 'loading') {
+        return {
+          close: function() {
+            clearTimeout(timer);
+            $toast.removeClass('show');
+          }
+        };
+      }
+    }
+    
+    // 通知函数 - 转换为使用showStatusToast
+    function notify(msg, type) {
+      var title, messageType;
+      
+      switch (type) {
+        case 'success':
+          title = '操作成功';
+          messageType = 'success';
+          break;
+        case 'error':
+          title = '操作失败';
+          messageType = 'error';
+          break;
+        case 'warning':
+          title = '警告信息';
+          messageType = 'warning';
+          break;
+        case 'loading':
+          title = '处理中';
+          messageType = 'loading';
+          // 对于loading类型，返回一个可以手动关闭的对象
+          return layer.load(1, {
+            shade: [0.3, '#000'],
+            time: 0
+          });
+        default:
+          title = '提示信息';
+          messageType = 'info';
+      }
+      
+      return showStatusToast({
+        type: messageType,
+        title: title,
+        message: msg
+      });
+    }
+    
+    //执行实例
+    var uploadInst = upload.render({
+      elem: '#thumb', //绑定元素
+      url: "<?php echo url('common/upload'); ?>", //上传接口
+      acceptMime: 'image/*', // 只接受图片类型
+      field: 'file', // 文件域的字段名
+      size: 20480, // 限制文件大小，单位 KB，这里设置20MB
+      before: function(obj){
+        //预读本地文件示例，不支持ie8
+        obj.preview(function(index, file, result){
+          $('#demo1').attr('src', result); //图片链接（base64）
+        });
+        
+        // 显示上传中
+        var loadingIndex = layer.load(1, {shade: [0.3, '#000']});
+        this.loadingIndex = loadingIndex;
+      },
+      done: function(res){
+        // 关闭上传中提示
+        layer.close(this.loadingIndex);
+        
+        console.log('上传响应:', res); // 打印响应以便调试
+        
+        // 兼容不同的响应代码
+        if (res.code == 0 || res.code == 1 || res.code == 2) {
+          var imgSrc = '';
+          if (res.data && res.data.src) {
+            imgSrc = res.data.src;
+          } else if (res.src) {
+            imgSrc = res.src;
+          }
+          
+          if (imgSrc) {
+            $('#demo1').attr('src', imgSrc);
+            $('#admin input[name="thumb"]').remove();
+            $('#admin').append('<input type="hidden" name="thumb" value="'+ imgSrc +'">');
+            notify('头像上传成功', 'success');
+          } else {
+            notify('上传成功，但未返回图片路径', 'error');
+          }
+        } else {
+          notify(res.msg || '上传失败，请检查网络或服务器配置', 'error');
+        }
+      },
+      error: function(){
+        // 关闭上传中提示
+        layer.close(this.loadingIndex);
+        
+        // 请求异常回调
+        notify('上传请求失败，请检查网络连接', 'error');
+      }
+    });
+    
+    // 角色选择变更事件
+    form.on('select(roleType)', function(data){
+      var value = data.value;
+      
+      // 显示/隐藏删除用户权限开关
+      if (value == 'user') {
+        $('#deletePermissionDiv').show();
+        $('#inviteCodeDiv').show();
+        $('#admin_cate_id').val(3); // 普通账号分组ID
+      } else if(value === 'admin'){
+        $('#deletePermissionDiv').hide();
+        $('#inviteCodeDiv').hide();
+        $('#admin_cate_id').val(2); // 普通管理员分组ID
+        // 清空邀请码
+        $('input[name="invite_code"]').val('');
+      } else if(value === 'super_admin'){
+        $('#deletePermissionDiv').hide();
+        $('#inviteCodeDiv').hide();
+        $('#admin_cate_id').val(1); // 超级管理员分组ID
+        // 清空邀请码
+        $('input[name="invite_code"]').val('');
+      }
+      
+      // 如果是普通账号，管理员和超级管理员可以自动生成邀请码
+      var isEdit = $('input[name="id"]').length > 0;
+      var currentAdminType = "<?php echo htmlentities((string) $current_admin['role_type']); ?>";
+      
+      if (!isEdit && value === 'user' && 
+          (currentAdminType === 'super_admin' || currentAdminType === 'admin')) {
+        $('input[name="invite_code"]').val('');
+        if ($('input[name="invite_code"]').val() === '') {
+          $('#generateInviteCode').trigger('click');
+        }
+      }
+    });
+    
+    // 监听查看权限切换
+    form.on('switch(viewAllInvites)', function(data){
+      var checked = this.checked;
+      if(checked) {
+        // 如果开启了"查看全部"，隐藏"下级用户"选择区域
+        $('#assignedInvitesDiv').hide();
+      } else {
+        // 如果关闭了"查看全部"，显示"下级用户"选择区域
+        $('#assignedInvitesDiv').show();
+      }
+    });
+    
+    // 初始化基于角色类型的界面调整
+    function adjustInterfaceByRoleType(roleType) {
+      if(roleType === 'user') {
+        $('#deletePermissionDiv').show();
+        $('#inviteCodeDiv').show();
+      } else if(roleType === 'admin') {
+        $('#deletePermissionDiv').hide();
+        $('#inviteCodeDiv').hide();
+      } else if(roleType === 'super_admin') {
+        $('#deletePermissionDiv').hide();
+        $('#inviteCodeDiv').hide();
+      }
+    }
+    
+    // 页面加载时根据已选择的角色类型判断是否显示删除权限选项并设置正确的分组ID
+    $(function(){
+      var roleType = $('select[name=role_type]').val();
+      adjustInterfaceByRoleType(roleType);
+      
+      // 根据当前登录的管理员角色设置邀请码框是否可编辑
+      var currentAdminType = "<?php echo htmlentities((string) $current_admin['role_type']); ?>";
+      if(currentAdminType === 'user') {
+          $('input[name="invite_code"]').attr('readonly', true);
+          $('#generateInviteCode').hide();
+      }
+      
+      // 根据当前选择的位数更新输入框maxlength
+      var codeLength = parseInt($('#codeLengthSelect').val() || 4);
+      $('input[name="invite_code"]').attr('maxlength', codeLength);
+      
+      // 初始化下拉框样式
+      initRoleTypeSelect();
+      
+      // 如果是添加模式且角色是普通账号，管理员和超级管理员可以自动生成邀请码
+      var isEdit = $('input[name="id"]').length > 0;
+      if (!isEdit && roleType === 'user' && $('input[name="invite_code"]').val() === '' && 
+          (currentAdminType === 'super_admin' || currentAdminType === 'admin')) {
+        $('#generateInviteCode').trigger('click');
+      }
+    });
+    
+    // 生成随机邀请码
+    $('#generateInviteCode').on('click', function() {
+      var codeLength = parseInt($('#codeLengthSelect').val() || 4);
+      // 确保在有效范围内
+      if (codeLength < 2) codeLength = 2;
+      if (codeLength > 6) codeLength = 6;
+      
+      var randomCode = generateRandomCode(codeLength);
+      $('input[name="invite_code"]').val(randomCode);
+      
+      // 标记邀请码已修改
+      if (isEdit) {
+        // 输出调试信息
+        console.log('邀请码已手动生成: ' + randomCode);
+      }
+    });
+    
+    // 监听code_length选择变化
+    form.on('select(codeLength)', function(data){
+      console.log('邀请码位数已设置为: ' + data.value);
+      
+      // 更新输入框的maxlength属性
+      var codeLength = parseInt(data.value);
+      $('input[name="invite_code"]').attr('maxlength', codeLength);
+      
+      // 如果当前输入框中有内容，检查是否需要截断
+      var currentCode = $('input[name="invite_code"]').val();
+      if (currentCode && currentCode.length > codeLength) {
+        $('input[name="invite_code"]').val(currentCode.substring(0, codeLength));
+      }
+    });
+    
+    // 给邀请码输入框添加输入验证，只允许数字
+    $('input[name="invite_code"]').on('input', function() {
+      var value = $(this).val();
+      // 使用正则表达式替换非数字字符
+      var numericValue = value.replace(/\D/g, '');
+      if (value !== numericValue) {
+        $(this).val(numericValue);
+      }
+    });
+    
+    // 生成随机字符串函数
+    function generateRandomCode(length) {
+      var chars = '0123456789';
+      var result = '';
+      for (var i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+    
+    // 在编辑模式下记录原始表单数据，用于检测是否有修改
+    var originalFormData = {};
+    
+    // 定义isEdit变量在全局作用域中
+    var isEdit = $('input[name="id"]').length > 0;
+    
+    if (isEdit) {
+      // 记录原始数据
+      originalFormData = {
+        admin_cate_id: "<?php echo htmlentities((string) (isset($info['admin']['admin_cate_id']) && ($info['admin']['admin_cate_id'] !== '')?$info['admin']['admin_cate_id']:'')); ?>",
+        role_type: "<?php echo htmlentities((string) (isset($info['admin']['role_type']) && ($info['admin']['role_type'] !== '')?$info['admin']['role_type']:'user')); ?>",
+        name: "<?php echo htmlentities((string) (isset($info['admin']['name']) && ($info['admin']['name'] !== '')?$info['admin']['name']:'')); ?>",
+        nickname: "<?php echo htmlentities((string) (isset($info['admin']['nickname']) && ($info['admin']['nickname'] !== '')?$info['admin']['nickname']:'')); ?>",
+        thumb: "<?php echo htmlentities((string) (isset($info['admin']['thumb']) && ($info['admin']['thumb'] !== '')?$info['admin']['thumb']:'')); ?>",
+        can_delete_user: "<?php echo htmlentities((string) (isset($info['admin']['can_delete_user']) && ($info['admin']['can_delete_user'] !== '')?$info['admin']['can_delete_user']:'0')); ?>",
+        invite_code: "<?php echo htmlentities((string) (isset($info['admin']['invite_code']) && ($info['admin']['invite_code'] !== '')?$info['admin']['invite_code']:'')); ?>"
+      };
+    }
+    
+    //监听提交
+    form.on('submit(admin)', function(data){
+      // 添加角色类型验证
+      if(isEditingSelf) {
+        var originalRole = $('input[name=original_role_type]').val();
+        if(data.field.role_type !== originalRole) {
+          notify('为了系统安全，不允许修改自己的角色类型', 'error');
+          return false;
+        }
+      }
+      
+      var loadIndex = notify('正在提交...', 'loading');
+      
+      // 处理表单数据中未选择的checkbox
+      if (!data.field.hasOwnProperty('can_delete_user')) {
+        data.field.can_delete_user = '0';
+      }
+      
+      if (isEdit) {
+        // 检查是否有字段被修改
+        var hasChanges = false;
+        
+        // 允许邀请码直接提交，不检查是否变化
+        if (data.field.role_type === 'user' && $('#inviteCodeDiv').is(':visible')) {
+          hasChanges = true;
+          console.log('普通账号角色，允许直接提交邀请码');
+        } else {
+          // 检查除密码外的字段是否有变化
+          for (var key in originalFormData) {
+            if (key !== 'password') {
+              var origValue = String(originalFormData[key] || '').trim();
+              var currentValue = String(data.field[key] || '').trim();
+              if (origValue !== currentValue) {
+                console.log('字段变化: ' + key + ', 原值: "' + origValue + '", 新值: "' + currentValue + '"');
+                hasChanges = true;
+                break;
+              }
+            }
+          }
+        }
+
+        // 如果密码有输入，也算是有变化
+        if (!hasChanges && data.field.password && data.field.password.trim() !== '') {
+          hasChanges = true;
+        }
+        
+        // 如果没有变化，显示提示并阻止提交
+        if (!hasChanges) {
+          layer.close(loadIndex);
+          notify('表单数据无变化，无需保存', 'error');
+          return false;
+        }
+      }
+      
+      $.ajax({
+        url: "<?php echo url('admin/admin/publish'); ?>",
+        data: data.field,
+        type: 'post',
+        dataType: 'json',
+        success: function(res) {
+          layer.close(loadIndex);
+          if (res.code == 1) {
+            notify(res.msg, 'success');
+            
+            // 检查是否需要强制登出
+            if (isEdit && data.field.id && data.field.status === '0') {
+              forceLogoutIfDisabled(data.field.id);
+            }
+            
+            setTimeout(function() {
+              var index = parent.layer.getFrameIndex(window.name);
+              parent.layer.close(index);
+              parent.location.reload();
+            }, 1000);
+          } else {
+            notify(res.msg || '操作失败', 'error');
+          }
+        },
+        error: function() {
+          layer.close(loadIndex);
+          notify('网络错误，请稍后重试', 'error');
+        }
+      });
+      return false;
+    });
+
+    // 检查普通用户状态并强制禁用用户退出登录
+    function forceLogoutIfDisabled(userId) {
+      // 仅对编辑模式下的普通账号生效
+      if (isEdit && originalFormData.role_type == 'user') {
+        // 发送请求检查账号是否是禁用状态，如果是则强制登出
+        $.ajax({
+          url: "<?php echo url('admin/admin/forceLogout'); ?>",
+          type: 'post',
+          data: {id: userId},
+          success: function(res) {
+            if(res.code == 1) {
+              console.log('禁用账号已强制登出');
+              
+              // 如果是当前登录用户被禁用，需要在页面显示提示
+              var currentAdminId = "<?php echo session('admin')?:0; ?>";
+              if (userId == currentAdminId) {
+                // 如果已经加载了账号状态监控脚本，则使用其提供的函数
+                if (typeof window.accountStatusMonitor !== 'undefined' && 
+                    typeof window.accountStatusMonitor.showDisabledNotice === 'function') {
+                  window.accountStatusMonitor.showDisabledNotice();
+                } else {
+                  // 显示即将退出的提示
+                  showStatusToast({
+                    type: 'error',
+                    title: '账号已禁用',
+                    message: '您的账号已被禁用，即将退出登录...',
+                    duration: 3000,
+                    callback: function() {
+                      // 退出登录
+                      $.ajax({
+                        url: "<?php echo url('admin/api/logout'); ?>",
+                        type: 'post',
+                        success: function() {
+                          window.top.location.href = "<?php echo url('admin/login/index'); ?>";
+                        }
+                      });
+                    }
+                  });
+                }
+              }
+            }
+          }
+        });
+      }
+    }
+  });
+  </script>
+  
+  <!-- 账号状态检查脚本 -->
+  <script src="/static/admin/js/account-status-monitor.js"></script>
+
+  <!-- 优化移动端交互和体验 -->
+  <style>
+    @media screen and (max-width: 768px) {
+      .admin-container {
+        margin: 5px auto;
+        padding: 15px;
+      }
+      
+      .admin-header {
+        padding-bottom: 12px;
+        margin-bottom: 15px;
+      }
+      
+      .admin-header .title {
+        font-size: 18px;
+      }
+      
+      .layui-form-label {
+        padding: 8px 10px 8px 0;
+        width: 90px;
+      }
+      
+      .layui-input-block {
+        margin-left: 100px;
+      }
+      
+      .form-actions {
+        margin-top: 20px;
+        padding-top: 12px;
+      }
+      
+      .form-actions .layui-btn {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 15px;
+      }
+      
+      /* 优化上传头像界面 */
+      .upload-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .upload-preview {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+      
+      .invite-code-input-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .invite-code-input-group .layui-input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 8px;
+      }
+      
+      .invite-code-input-group .code-length-select {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 8px;
+      }
+      
+      .invite-code-btn {
+        width: 100%;
+      }
+      
+      /* 优化状态通知位置 */
+      .status-toast.show {
+        transform: translateY(80px);
+      }
+    }
+
+    /* 针对更小屏幕的优化 */
+    @media screen and (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+      
+      .admin-container {
+        padding: 12px;
+        border-radius: 6px;
+      }
+      
+      .admin-header .icon {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+        margin-right: 10px;
+      }
+      
+      .admin-header .title {
+        font-size: 16px;
+      }
+      
+      .layui-form-label {
+        width: 80px;
+        padding: 6px 8px 6px 0;
+        font-size: 13px;
+      }
+      
+      .layui-input-block {
+        margin-left: 90px;
+      }
+      
+      .layui-input, .layui-select, .layui-textarea {
+        height: 34px;
+        font-size: 13px;
+      }
+      
+      .layui-form-mid.layui-word-aux {
+        font-size: 11px;
+      }
+      
+      /* 优化提示信息显示 */
+      .role-tips {
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+      
+      .role-tips h4 {
+        font-size: 13px;
+        margin-bottom: 5px;
+      }
+      
+      .role-tips p {
+        margin: 4px 0;
+      }
+      
+      /* 面包屑导航 */
+      .admin-breadcrumb {
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</body>
+</html> 

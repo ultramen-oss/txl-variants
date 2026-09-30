@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>下级用户管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" href="/static/admin/css/admin.css" media="all">
+    <style type="text/css">
+        body {
+            background-color: #f5f7fa;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .admin-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        /* 头部信息区域 */
+        .header-info {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: #3b82f6;
+            color: #fff;
+            position: relative;
+        }
+        .header-info i {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .header-info .title {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .header-info .lock-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 功能按钮区域 */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-weight: 500;
+        }
+        .action-button.purple {
+            background-color: #8b5cf6;
+            color: white;
+        }
+        .action-button.blue {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .action-button.green {
+            background-color: #10b981;
+            color: white;
+        }
+        
+        /* 权限信息区域 */
+        .permission-info {
+            padding: 15px 20px;
+            background-color: #f0f9ff;
+            border-bottom: 1px solid #e0f2fe;
+        }
+        .permission-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .permission-info-item:last-child {
+            margin-bottom: 0;
+        }
+        .permission-info-label {
+            color: #0369a1;
+            font-weight: 500;
+            margin-right: 8px;
+            font-size: 14px;
+        }
+        .permission-info-value {
+            color: #0369a1;
+            font-size: 14px;
+        }
+        .permission-info-value .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .badge.blue {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .badge.green {
+            background-color: #10b981;
+            color: white;
+        }
+        
+        /* 表格样式 */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .admin-table th {
+            background-color: #f8fafc;
+            color: #334155;
+            font-weight: 600;
+            text-align: left;
+            padding: 15px 20px;
+            font-size: 14px;
+        }
+        .admin-table td {
+            padding: 15px 20px;
+            border-top: 1px solid #f1f5f9;
+            font-size: 14px;
+            color: #475569;
+        }
+        .admin-table tr:hover {
+            background-color: #faf5ff;
+        }
+        
+        /* 用户类型标签 */
+        .user-type {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+        }
+        .user-type.normal {
+            background-color: #10b981;
+            color: white;
+        }
+        
+        /* 邀请码区域 */
+        .invite-code-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .invite-code {
+            font-family: monospace;
+            background-color: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            background-color: #e2e8f0;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            background-color: #cbd5e1;
+            color: #334155;
+        }
+        
+        /* 用户数量统计 */
+        .count-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f1f5f9;
+            color: #334155;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .count-badge i {
+            margin-right: 5px;
+            color: #0ea5e9;
+        }
+        
+        /* 分页样式 */
+        .pagination-container {
+            padding: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .modern-pagination {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .modern-pagination .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .modern-pagination .pagination li {
+            display: inline-flex;
+            margin: 0;
+        }
+        .modern-pagination .pagination li a,
+        .modern-pagination .pagination li span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            color: #555;
+            background-color: #fff;
+            border: none;
+            text-decoration: none;
+            min-width: 40px;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            border-right: 1px solid #f0f0f0;
+        }
+        .modern-pagination .pagination li:last-child a,
+        .modern-pagination .pagination li:last-child span {
+            border-right: none;
+        }
+        .modern-pagination .pagination li a:hover {
+            background-color: #f7f7f7;
+            color: #3b82f6;
+        }
+        .modern-pagination .pagination .active span {
+            background-color: #3b82f6;
+            color: #fff;
+            font-weight: 500;
+        }
+        .modern-pagination .pagination .disabled span {
+            color: #ccc;
+            cursor: not-allowed;
+            background-color: #f9f9f9;
+        }
+        
+        /* 复制成功通知样式 */
+        .copy-success {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s;
+            font-size: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        .copy-success.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .copy-success i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        /* 空状态提示 */
+        .empty-state {
+            padding: 40px 20px;
+            text-align: center;
+            color: #64748b;
+        }
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #cbd5e1;
+            display: block;
+        }
+        .empty-state .title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #475569;
+        }
+        .empty-state .desc {
+            font-size: 14px;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* 用户选择弹窗样式 */
+        .user-select-dialog {
+            position: relative;
+            padding: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .user-select-header {
+            display: flex;
+            align-items: center;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .user-select-header i {
+            font-size: 20px;
+            margin-right: 10px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+        }
+        
+        .search-bar {
+            display: flex;
+            padding: 20px 24px;
+            gap: 10px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .search-bar .layui-input {
+            flex: 1;
+            height: 38px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            padding: 0 15px;
+            font-size: 14px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .search-bar .layui-input:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+        }
+        
+        .search-bar .layui-btn {
+            height: 38px;
+            border-radius: 6px;
+            background-color: #8b5cf6;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(139, 92, 246, 0.2);
+        }
+        
+        .selection-info {
+            display: flex;
+            background: #f0f9ff;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e0f2fe;
+            font-size: 14px;
+            color: #0369a1;
+        }
+        
+        .selection-info .info-icon {
+            flex-shrink: 0;
+            margin-right: 15px;
+            font-size: 16px;
+            color: #0ea5e9;
+        }
+        
+        .selection-info .info-content {
+            flex: 1;
+        }
+        
+        .selection-info .info-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #0369a1;
+        }
+        
+        .selection-info .info-item {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .selection-info .info-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .selection-info .info-item i {
+            margin-right: 8px;
+            color: #0ea5e9;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        
+        .user-select-list {
+            max-height: 220px;
+            overflow-y: auto;
+            padding: 0 10px;
+            margin: 15px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .user-select-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 8px;
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+        }
+        
+        .user-select-item:last-child {
+            border-bottom: none;
+        }
+        
+        .user-select-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .user-select-item.selected {
+            background-color: #f0f7ff;
+        }
+        
+        .select-checkbox {
+            margin-right: 10px;
+        }
+        
+        .user-info {
+            flex: 1;
+            margin-left: 5px;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+        }
+        
+        .user-account {
+            font-weight: normal;
+            color: #6b7280;
+        }
+        
+        .user-invite-code {
+            margin-top: 4px;
+        }
+        
+        .invite-code-tag {
+            display: inline-flex;
+            align-items: center;
+            background: #e5e7eb;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #4b5563;
+            font-size: 12px;
+        }
+        
+        .invite-code-tag i {
+            margin-right: 6px;
+            color: #8b5cf6;
+        }
+        
+        .user-status {
+            margin-left: 10px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+        
+        .user-status i {
+            margin-right: 4px;
+        }
+        
+        .status-active {
+            background-color: #d1fadf;
+            color: #166534;
+        }
+        
+        .status-disabled {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .selection-counter {
+            padding: 10px 24px;
+            text-align: right;
+            font-size: 14px;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .selection-counter i {
+            color: #10b981;
+            margin-right: 5px;
+        }
+        
+        .selection-counter span {
+            font-weight: 600;
+            color: #10b981;
+            margin: 0 4px;
+        }
+        
+        .user-select-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 20px 24px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .user-select-actions .action-btn {
+            height: 38px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 0 16px;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .user-select-actions .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .empty-user-list {
+            padding: 30px;
+            text-align: center;
+            color: #777;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+        
+        .empty-user-list i {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: block;
+            color: #94a3b8;
+        }
+        
+        .empty-user-list p {
+            font-size: 14px;
+            color: #64748b;
+        }
+        
+        /* 状态通知弹窗样式 */
+        .status-toast {
+            position: fixed;
+            top: -100px;
+            right: 20px;
+            min-width: 250px;
+            max-width: 350px;
+            background: linear-gradient(145deg, #4CAF50, #2E7D32);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            transform: translateY(0);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .status-toast.error {
+            background: linear-gradient(145deg, #f44336, #d32f2f);
+        }
+
+        .status-toast.warning {
+            background: linear-gradient(145deg, #ff9800, #ed6c02);
+        }
+
+        .status-toast.show {
+            transform: translateY(120px);
+            opacity: 1;
+        }
+
+        .status-toast-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status-toast-content {
+            flex: 1;
+        }
+
+        .status-toast-title {
+            font-weight: 600;
+            margin-bottom: 2px;
+            display: block;
+            font-size: 16px;
+        }
+
+        .status-toast-message {
+            opacity: 0.95;
+            font-size: 14px;
+        }
+
+        .status-toast-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+        }
+
+        .status-toast-progress-bar {
+            height: 100%;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 0 0 8px 8px;
+            animation: toast-progress 3s linear forwards;
+        }
+
+        @keyframes toast-progress {
+            0% {
+                width: 100%;
+            }
+            100% {
+                width: 0;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            /* 表格滚动样式 */
+            .admin-table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .admin-table th, 
+            .admin-table td {
+                white-space: nowrap;
+                padding: 10px 15px;
+            }
+            
+            /* 优化按钮布局 */
+            .action-buttons {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .action-button {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            
+            /* 用户选择弹窗优化 */
+            .user-select-dialog {
+                width: 100% !important;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .search-bar .layui-input {
+                width: 100%;
+            }
+            
+            .user-select-list {
+                max-height: 180px;
+            }
+            
+            .user-select-actions {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .user-select-actions .action-btn {
+                margin-bottom: 5px;
+            }
+            
+            /* 邀请码展示优化 */
+            .invite-code {
+                max-width: 70px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            /* 头部信息区域样式调整 */
+            .header-info .title {
+                font-size: 16px;
+            }
+            
+            /* 面包屑导航优化 */
+            .permission-info-item {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 8px;
+            }
+            
+            .permission-info-label {
+                margin-bottom: 4px;
+            }
+        }
+
+        /* 针对更小屏幕的优化 */
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .admin-container {
+                border-radius: 6px;
+            }
+            
+            .header-info {
+                padding: 15px;
+            }
+            
+            .header-info .lock-icon {
+                width: 28px;
+                height: 28px;
+                right: 15px;
+            }
+            
+            .action-buttons {
+                padding: 10px 15px;
+            }
+            
+            /* 用户信息样式调整 */
+            .user-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .user-select-header {
+                font-size: 16px;
+                padding: 15px;
+            }
+            
+            .user-select-header i {
+                font-size: 18px;
+                width: 30px;
+                height: 30px;
+            }
+            
+            .selection-info {
+                padding: 12px 15px;
+            }
+            
+            /* 状态通知弹窗位置调整 */
+            .status-toast.show {
+                transform: translateY(80px);
+            }
+            
+            /* 优化空状态提示 */
+            .empty-state {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="header-info">
+            <i class="fa fa-users"></i>
+            <div class="title">下级用户管理</div>
+            <div class="lock-icon">
+                <i class="fa fa-eye"></i>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="action-button blue" onclick="goBack()">
+                <i class="fa fa-arrow-left"></i> 返回管理员列表
+            </button>
+            <button class="action-button blue" onclick="refreshList()">
+                <i class="fa fa-refresh"></i> 刷新
+            </button>
+            {if $admin.role_type == 'super_admin' && !$view_all}
+            <button class="action-button green" onclick="showAssignUsersDialog()">
+                <i class="fa fa-user-plus"></i> 分配下级用户
+            </button>
+            {/if}
+        </div>
+        
+        <div class="permission-info">
+            <div class="permission-info-item">
+                <span class="permission-info-label"><i class="fa fa-user-circle"></i> 管理员账号:</span>
+                <span class="permission-info-value">{$target_admin.nickname} ({$target_admin.name})</span>
+            </div>
+            <div class="permission-info-item">
+                <span class="permission-info-label"><i class="fa fa-shield"></i> 权限类型:</span>
+                <span class="permission-info-value">
+                    {if $view_all}
+                    <span class="badge blue"><i class="fa fa-check-circle"></i> 查看所有用户</span>
+                    {else}
+                    <span class="badge green"><i class="fa fa-filter"></i> 部分用户查看</span>
+                    {/if}
+                </span>
+            </div>
+        </div>
+        
+        {if !empty($users)}
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>昵称</th>
+                    <th>用户名</th>
+                    <th>角色类型</th>
+                    <th>邀请码</th>
+                    <th>邀请用户数</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                {volist name="users" id="vo"}
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.nickname}</td>
+                    <td>{$vo.name}</td>
+                    <td>
+                        <div class="user-type normal">
+                            普通账号
+                        </div>
+                    </td>
+                    <td>
+                        <div class="invite-code-container">
+                            <span class="invite-code">{$vo.invite_code}</span>
+                            <span class="copy-btn" onclick="copyInviteCode('{$vo.invite_code}')">
+                                <i class="fa fa-copy"></i>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="count-badge">
+                            <i class="fa fa-users"></i> {$vo.invited_count}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-form">
+                            <input type="checkbox" name="status" value="{$vo.id}" lay-skin="switch" lay-text="启用|禁用" {if $vo.status == 1}checked{/if} disabled>
+                        </div>
+                    </td>
+                </tr>
+                {/volist}
+            </tbody>
+        </table>
+        {else}
+        <div class="empty-state">
+            <i class="fa fa-users"></i>
+            <div class="title">暂无分配的用户</div>
+            <div class="desc">
+                {if $view_all}
+                您拥有查看所有用户的权限，但当前系统中没有普通账号。
+                {else}
+                您当前未被分配任何用户数据权限，请联系超级管理员为您分配可查看的用户。
+                {/if}
+            </div>
+        </div>
+        {/if}
+    </div>
+    
+    <!-- 复制成功提示 -->
+    <div class="copy-success" id="copySuccess"><i class="fa fa-check-circle"></i> 邀请码已复制到剪贴板</div>
+    
+    <!-- 状态通知弹窗 -->
+    <div class="status-toast" id="statusToast">
+        <div class="status-toast-icon">
+            <i class="fa fa-check-circle"></i>
+        </div>
+        <div class="status-toast-content">
+            <span class="status-toast-title">操作成功</span>
+            <span class="status-toast-message">操作已成功完成</span>
+        </div>
+        <div class="status-toast-progress">
+            <div class="status-toast-progress-bar"></div>
+        </div>
+    </div>
+    
+    <script src="/static/layui/layui.js"></script>
+    <script src="/static/public/jquery/jquery.min.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function() {
+            var layer = layui.layer,
+                form = layui.form;
+        });
+        
+        // 返回管理员列表
+        function goBack() {
+            location.href = "{:url('admin/admin/admin_list')}";
+        }
+        
+        // 刷新列表
+        function refreshList() {
+            location.reload();
+        }
+        
+        // 在当前弹窗中显示分配下级用户的对话框
+        function showAssignUsersDialog() {
+            // 获取用户列表
+            $.ajax({
+                url: "{:url('admin/admin/getUsersWithInviteCodes')}",
+                type: 'get',
+                success: function(res) {
+                    if(res.code == 1) {
+                        // 获取当前管理员已分配的邀请码
+                        $.ajax({
+                            url: "{:url('admin/admin/getAssignedInvites')}",
+                            type: 'get',
+                            data: {id: {$target_admin.id}},
+                            success: function(assignedRes) {
+                                var assignedInvites = [];
+                                if(assignedRes.code == 1 && assignedRes.data) {
+                                    assignedInvites = assignedRes.data.split(',');
+                                }
+                                
+                                // 打开用户选择弹窗
+                                layer.open({
+                                    type: 1,
+                                    title: false,
+                                    closeBtn: 0,
+                                    shadeClose: true,
+                                    shade: 0.4,
+                                    area: ['650px', '550px'],
+                                    skin: 'modern-dialog',
+                                    content: `
+                                        <div class="user-select-dialog">
+                                            <div class="user-select-header">
+                                                <i class="fa fa-users"></i> 选择下级用户
+                                            </div>
+                                            <div class="search-bar">
+                                                <input type="text" id="userSearchInput" placeholder="搜索用户名或邀请码" class="layui-input">
+                                                <button type="button" class="layui-btn" id="userSearchBtn">
+                                                    <i class="fa fa-search"></i> 搜索
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="selection-info">
+                                                <div class="info-icon"><i class="fa fa-info-circle"></i></div>
+                                                <div class="info-content">
+                                                    <div class="info-title">选择说明：</div>
+                                                    <div class="info-item"><i class="fa fa-check"></i> 被选中的普通账号及其邀请的用户数据将对该管理员可见</div>
+                                                    <div class="info-item"><i class="fa fa-check"></i> 未选中的普通账号所邀请的用户数据将对该管理员不可见</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="user-select-list">
+                                                <div class="layui-form" id="userSelectForm">
+                                                    ${generateUserList(res.data, assignedInvites)}
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="selection-counter">
+                                                <i class="fa fa-check-circle"></i> 已选择: <span id="userSelectedCount">0</span> 个用户
+                                            </div>
+                                            
+                                            <div class="user-select-actions">
+                                                <button type="button" class="layui-btn layui-btn-primary action-btn" onclick="layer.closeAll('page')">
+                                                    <i class="fa fa-times"></i> 取消
+                                                </button>
+                                                <button type="button" class="layui-btn layui-btn-warm action-btn" id="userDeselectAllBtn">
+                                                    <i class="fa fa-square-o"></i> 取消全选
+                                                </button>
+                                                <button type="button" class="layui-btn action-btn" id="userSelectAllBtn">
+                                                    <i class="fa fa-check-square-o"></i> 全选
+                                                </button>
+                                                <button type="button" class="layui-btn layui-btn-normal action-btn" id="saveUserSelectBtn">
+                                                    <i class="fa fa-save"></i> 保存选择
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `,
+                                    success: function() {
+                                        layui.form.render(); // 重新渲染表单元素
+                                        updateUserSelectedCount(); // 更新初始选中数量
+                                        
+                                        // 搜索功能
+                                        $('#userSearchBtn, #userSearchInput').on('keyup click', function(e) {
+                                            if(e.type === 'keyup' && e.keyCode !== 13 && this.id === 'userSearchInput') {
+                                                return;
+                                            }
+                                            
+                                            var keyword = $('#userSearchInput').val().toLowerCase();
+                                            
+                                            $('.user-select-item').each(function() {
+                                                var text = $(this).text().toLowerCase();
+                                                if(text.indexOf(keyword) > -1) {
+                                                    $(this).show();
+                                                } else {
+                                                    $(this).hide();
+                                                }
+                                            });
+                                        });
+                                        
+                                        // 全选
+                                        $('#userSelectAllBtn').on('click', function() {
+                                            $('.user-select-item input[type="checkbox"]').prop('checked', true);
+                                            layui.form.render('checkbox');
+                                            updateUserSelectedCount();
+                                        });
+                                        
+                                        // 取消全选
+                                        $('#userDeselectAllBtn').on('click', function() {
+                                            $('.user-select-item input[type="checkbox"]').prop('checked', false);
+                                            layui.form.render('checkbox');
+                                            updateUserSelectedCount();
+                                        });
+                                        
+                                        // 保存选择
+                                        $('#saveUserSelectBtn').on('click', function() {
+                                            var selectedInvites = [];
+                                            $('.user-select-item input[type="checkbox"]:checked').each(function() {
+                                                selectedInvites.push($(this).val());
+                                            });
+                                            
+                                            // 发送AJAX请求保存分配的邀请码
+                                            $.ajax({
+                                                url: "{:url('admin/admin/assignInvites')}",
+                                                type: 'post',
+                                                data: {
+                                                    id: {$target_admin.id},
+                                                    assigned_invites: selectedInvites.join(',')
+                                                },
+                                                success: function(res) {
+                                                    if(res.code == 1) {
+                                                        showStatusToast({
+                                                            type: 'success',
+                                                            title: '分配成功',
+                                                            message: res.msg || '邀请码已成功分配'
+                                                        });
+                                                        layer.closeAll('page');
+                                                        // 刷新页面
+                                                        setTimeout(function() {
+                                                            location.reload();
+                                                        }, 1500);
+                                                    } else {
+                                                        showStatusToast({
+                                                            type: 'error',
+                                                            title: '分配失败',
+                                                            message: res.msg || '邀请码分配失败'
+                                                        });
+                                                    }
+                                                }
+                                            });
+                                        });
+                                        
+                                        // 监听复选框变化
+                                        layui.form.on('checkbox', function() {
+                                            updateUserSelectedCount();
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        showStatusToast({
+                            type: 'error',
+                            title: '获取失败',
+                            message: res.msg || '获取用户列表失败'
+                        });
+                    }
+                }
+            });
+        }
+        
+        // 生成用户列表HTML
+        function generateUserList(users, assignedInvites) {
+            if(!users || users.length === 0) {
+                return '<div class="empty-user-list"><i class="fa fa-info-circle"></i><p>暂无普通账号用户数据</p></div>';
+            }
+            
+            var html = '';
+            for(var i = 0; i < users.length; i++) {
+                var user = users[i];
+                var isChecked = assignedInvites.includes(user.invite_code) ? 'checked' : '';
+                
+                html += `
+                    <div class="user-select-item ${isChecked ? 'selected' : ''}">
+                        <div class="select-checkbox">
+                            <input type="checkbox" name="users[]" value="${user.invite_code}" title="" lay-skin="primary" ${isChecked}>
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name">${user.nickname} <span class="user-account">(${user.name})</span></div>
+                            <div class="user-invite-code">
+                                <span class="invite-code-tag">
+                                    <i class="fa fa-qrcode"></i>${user.invite_code}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="user-status ${user.status == 1 ? 'status-active' : 'status-disabled'}">
+                            <i class="fa fa-${user.status == 1 ? 'check-circle' : 'times-circle'}"></i>
+                            ${user.status == 1 ? '正常' : '禁用'}
+                        </div>
+                    </div>
+                `;
+            }
+            return html;
+        }
+        
+        // 更新已选择用户数量
+        function updateUserSelectedCount() {
+            var count = $('.user-select-item input[type="checkbox"]:checked').length;
+            $('#userSelectedCount').text(count);
+        }
+        
+        // 复制邀请码
+        function copyInviteCode(code) {
+            if (!code) return;
+            
+            // 创建临时textarea元素
+            var textarea = document.createElement('textarea');
+            textarea.value = code;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'absolute';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            
+            // 选择文本并复制
+            textarea.select();
+            document.execCommand('copy');
+            
+            // 移除临时元素
+            document.body.removeChild(textarea);
+            
+            // 显示成功提示
+            var successEl = document.getElementById('copySuccess');
+            successEl.classList.add('show');
+            
+            // 3秒后隐藏提示
+            setTimeout(function() {
+                successEl.classList.remove('show');
+            }, 3000);
+        }
+        
+        // 显示状态通知弹窗
+        function showStatusToast(options) {
+            var $toast = $('#statusToast');
+            var icon = options.type === 'success' ? 'fa-check-circle' : 
+                      (options.type === 'warning' ? 'fa-exclamation-triangle' : 'fa-times-circle');
+            var background = options.type === 'success' ? 'linear-gradient(145deg, #4CAF50, #2E7D32)' : 
+                            (options.type === 'warning' ? 'linear-gradient(145deg, #ff9800, #ed6c02)' :
+                            'linear-gradient(145deg, #f44336, #d32f2f)');
+            
+            // 设置图标
+            $toast.find('.status-toast-icon i').attr('class', 'fa ' + icon);
+            
+            // 设置标题和消息
+            $toast.find('.status-toast-title').text(options.title || (options.type === 'success' ? '操作成功' : 
+                                                 (options.type === 'warning' ? '警告' : '操作失败')));
+            $toast.find('.status-toast-message').text(options.message);
+            
+            // 设置背景色
+            $toast.css('background', background);
+            
+            // 重置进度条动画
+            var $progressBar = $toast.find('.status-toast-progress-bar');
+            $progressBar.remove();
+            $toast.find('.status-toast-progress').append('<div class="status-toast-progress-bar"></div>');
+            
+            // 显示通知
+            $toast.addClass('show');
+            
+            // 3秒后隐藏通知
+            setTimeout(function() {
+                $toast.removeClass('show');
+                if (options.callback) {
+                    options.callback();
+                }
+            }, options.duration || 3000);
+        }
+    </script>
+    
+    <!-- 账号状态检查脚本 -->
+    <script src="/static/admin/js/account-status-monitor.js"></script>
+</body>
+</html> 

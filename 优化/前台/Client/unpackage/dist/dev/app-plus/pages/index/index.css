@@ -1,0 +1,343 @@
+
+	/* 重置默认样式 */
+body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+}
+
+	/* 移除默认导航栏 */
+uni-page-head {
+		display: none;
+}
+
+	/* 设置全屏容器 */
+.container {
+		min-height: 100vh;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+}
+
+
+.slideshow[data-v-44742fbd] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-color: #000;
+  overflow: hidden;
+}
+.slideshow-image[data-v-44742fbd] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background-size: cover;
+  background-position: center;
+  will-change: opacity, transform;
+  transform: scale(1.1);
+}
+.slideshow-image.current[data-v-44742fbd] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+	/* 添加一些基本样式 */
+	/* 可以根据需要添加更多样式 */
+	
+	/* 登录按钮样式 - 高优先级作为后备 */
+uni-button[disabled] {
+		opacity: 0.7 !important;
+		cursor: not-allowed !important;
+		background: linear-gradient(135deg, rgba(150, 150, 150, 0.8) 0%, rgba(180, 180, 180, 0.8) 100%) !important;
+		color: rgba(255, 255, 255, 0.5) !important;
+}
+uni-button:not([disabled]) {
+		/* 这些样式只有在内联样式和forceUpdateButtonStyle都失败时才会生效 */
+		color: var(--login-button-font-color, #222020);
+		font-weight: var(--login-button-font-weight, bold);
+		background: var(--login-button-bg, linear-gradient(135deg, #736b85 0%, #184dc9 100%));
+		box-shadow: var(--login-button-shadow, 0 4px 15px rgba(0, 0, 0, 0.3));
+}
+	
+	/* 容器样式 */
+.container {
+		width: 100%;
+		height: 100vh;
+		position: relative;
+		overflow: hidden;
+}
+	
+	/* 表单容器样式 */
+.form-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 1;
+}
+.form-box {
+		width: 85%;
+		max-width: 400px;
+		padding: 15px;
+		border-radius: 10px;
+		background-color: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+}
+	
+	/* 输入框相关样式 */
+.input-container {
+		margin-bottom: 15px;
+		background-color: rgba(255, 255, 255, 0.1);
+		border-radius: 8px;
+		padding: 8px;
+}
+.input-group {
+		display: flex;
+		align-items: center;
+		background-color: rgba(0, 0, 0, 0.3);
+		border-radius: 5px;
+		margin-bottom: 10px;
+		overflow: hidden;
+}
+.input-prefix {
+		display: flex;
+		align-items: center;
+		padding: 0 10px;
+}
+.area-code {
+		color: white;
+		font-size: 14px;
+}
+.separator {
+		color: rgba(255, 255, 255, 0.5);
+		margin: 0 5px;
+}
+.input {
+		flex: 1;
+		height: 45px;
+		background: transparent;
+		border: none;
+		color: white;
+		font-size: 16px;
+		padding: 0 10px;
+		border-bottom: 1px solid transparent;
+		transition: border-color 0.3s ease;
+}
+.input.error {
+		border-bottom: 1px solid #ff5252;
+		animation: shake 0.5s ease-in-out;
+}
+@keyframes shake {
+0%, 100% { transform: translateX(0);
+}
+20%, 60% { transform: translateX(-5px);
+}
+40%, 80% { transform: translateX(5px);
+}
+}
+.error-message {
+		color: #ff5252;
+		font-size: 12px;
+		padding: 5px 10px;
+		margin-top: -5px;
+		margin-bottom: 10px;
+		text-align: left;
+		background-color: rgba(255, 82, 82, 0.1);
+		border-radius: 0 0 5px 5px;
+}
+	
+	/* 协议和版权信息样式 */
+.agreement, .copyright {
+		text-align: center;
+		margin-top: 15px;
+		font-size: 12px;
+}
+.link {
+		text-decoration: underline;
+}
+	
+	
+	/* Logo和标题样式 */
+.logo-title-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 20px;
+		margin-top: 2px;
+}
+.logo-image {
+		width: 160px;
+		height: 160px;
+		margin-bottom: -15px;
+}
+.login-title {
+		color: white;
+		font-size: 20px;
+		font-weight: bold;
+		text-align: center;
+		margin-top: -10px;
+}
+	
+	/* 倒计时弹窗 */
+.countdown-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 9999;
+		background-color: rgba(0, 0, 0, 0.5);
+}
+.countdown-card {
+		background-color: #fff;
+		border-radius: 10px;
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 80%;
+		max-width: 300px;
+}
+.countdown-icon {
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		background-color: #4285f4;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 15px;
+}
+.check-icon {
+		color: white;
+		font-size: 30px;
+}
+.countdown-text {
+		text-align: center;
+		font-size: 16px;
+		color: #333;
+}
+	
+	/* 权限引导弹窗 */
+.zhezhao {
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.7);
+		position: fixed;
+		z-index: 9997;
+}
+.zhezhao1 {
+		z-index: 9999;
+}
+.zhezhao2 {
+		z-index: 9998;
+}
+.win-view {
+		position: fixed;
+		z-index: 9999;
+		width: 90%;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		height: 10.9375rem;
+		border-radius: 0.3125rem;
+		background-color: #ffffff;
+}
+.win-title {
+		text-align: center;
+		line-height: 2.5rem;
+		color: #000000;
+		font-weight: bold;
+		font-size: 1.125rem;
+}
+.win-info {
+		text-align: center;
+		font-size: 1rem;
+		color: #607d8b;
+		line-height: 1.40625rem;
+		padding: 0.625rem;
+}
+.win-view-button {
+		display: flex;
+		width: 90%;
+		margin-left: 5%;
+}
+.win-view-button uni-button {
+		width: 45%;
+		color: #ffffff !important;
+		font-size: 0.9375rem;
+		background-color: #409eff !important;
+		background-image: none !important;
+		border: none !important;
+}
+.cancel-but {
+		background-color: #909399 !important;
+}
+	
+	/* 优化语言下拉菜单 */
+@media screen and (max-height: 600px) {
+		/* 在低高度屏幕上优化语言切换菜单 */
+uni-view[v-if="showLanguageDropdown"] {
+			max-height: 70vh;
+			overflow-y: auto;
+}
+}
+	
+	/* 添加横屏模式样式 - 只调整输入区域大小 */
+@media screen and (orientation: landscape) {
+		/* 横屏模式下缩小输入区域 */
+.input-container {
+			margin-bottom: 10px;
+			padding: 5px;
+}
+.input-group {
+			margin-bottom: 6px;
+}
+.input {
+			height: 32px;
+			font-size: 14px;
+}
+		
+		/* 横屏时错误消息调整 */
+.error-message {
+			padding: 2px 6px;
+			margin-top: -3px;
+			margin-bottom: 6px;
+			font-size: 10px;
+}
+		
+		/* 横屏时减小表单内边距 */
+.form-box {
+			padding: 12px;
+}
+		
+		/* 横屏模式下缩小其他元素 */
+uni-button {
+			height: 38px !important;
+}
+.logo-title-container {
+			margin-bottom: 8px;
+			margin-top: 2px;
+}
+.login-title {
+			margin-bottom: 2px;
+}
+}

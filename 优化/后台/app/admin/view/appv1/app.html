@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>已安装App</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/static/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="/static/css/admin.css"  media="all">
+  <!-- 引入移动端适配CSS -->
+  <link rel="stylesheet" href="/app/admin/view/appv1/mobile.css" media="all">
+  <style type="text/css">
+    body { 
+      background-color: #f8f9fc; 
+      padding: 0; 
+      margin: 0; 
+      font-family: "Microsoft YaHei", sans-serif; 
+    }
+    
+    /* 容器 */
+    .tplay-body-div {
+      background: #fff;
+      border-radius: 0;
+      height: 100%;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: none;
+    }
+    
+    /* 顶部标题隐藏 */
+    .page-title, .search-bar {
+      display: none;
+    }
+    
+    /* 表格容器 */
+    .table-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+    }
+    
+    /* 表格样式 */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: none;
+      font-size: 14px;
+    }
+    
+    .custom-table th {
+      background: #8257e6;
+      color: white;
+      font-weight: 500;
+      text-align: center;
+      padding: 12px 15px;
+      border: none;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    .custom-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+      text-align: center;
+      vertical-align: middle;
+    }
+    
+    .custom-table tr:hover {
+      background-color: #f8f9fc;
+    }
+    
+    .custom-table tr:nth-child(even) {
+      background-color: #f9fafc;
+    }
+    
+    /* APP列 */
+    .app-column {
+      text-align: left;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .app-column i {
+      color: #8257e6;
+      font-size: 16px;
+    }
+    
+    /* 导出按钮区域 */
+    .export-actions {
+      background: #f9f9fb;
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .total-count {
+      background: rgba(130, 87, 230, 0.1);
+      color: #8257e6;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .total-count i {
+      font-size: 14px;
+    }
+    
+    .total-count b {
+      font-weight: 700;
+    }
+    
+    .export-btns {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .export-btn {
+      background: #8257e6;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    
+    .export-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    
+    /* 空数据状态 */
+    .empty-data {
+      text-align: center;
+      padding: 50px 0;
+      color: #888;
+    }
+    
+    .empty-data i {
+      font-size: 50px;
+      color: #ddd;
+      margin-bottom: 15px;
+      display: block;
+    }
+    
+    /* 分页样式 */
+    .pagination-area {
+      padding: 10px 15px;
+      background: #f9f9fb;
+      border-top: 1px solid #eee;
+    }
+    
+    /* APP图标样式 */
+    .app-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    /* 银行类应用样式 */
+    .bank-app {
+      color: #ff4757 !important;
+      font-weight: 600;
+    }
+    
+    /* 系统应用样式 */
+    .system-app-item {
+      opacity: 0.8;
+    }
+    
+    .system-app-item .fa-cog {
+      color: #2684ff;
+    }
+    
+    /* APP列表样式 */
+    .app-list-view {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 15px;
+    }
+    
+    .app-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80px;
+      text-align: center;
+    }
+    
+    .app-item-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .app-item-name {
+      font-size: 12px;
+      color: #333;
+      word-break: break-word;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    
+    .bank-app-item .app-item-name {
+      color: #ff4757;
+    }
+    
+    /* 状态通知弹窗样式 */
+    .status-toast {
+      position: fixed;
+      top: -100px;
+      right: 20px;
+      min-width: 250px;
+      max-width: 350px;
+      background: linear-gradient(145deg, #4CAF50, #2E7D32);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      transform: translateY(0);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .status-toast.error {
+      background: linear-gradient(145deg, #f44336, #d32f2f);
+    }
+
+    .status-toast.warning {
+      background: linear-gradient(145deg, #ff9800, #ed6c02);
+    }
+
+    .status-toast.show {
+      transform: translateY(120px);
+      opacity: 1;
+    }
+
+    .status-toast-icon {
+      font-size: 24px;
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .status-toast-content {
+      flex: 1;
+    }
+
+    .status-toast-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+      display: block;
+      font-size: 16px;
+    }
+
+    .status-toast-message {
+      opacity: 0.95;
+      font-size: 14px;
+    }
+
+    .status-toast-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+    }
+
+    .status-toast-progress-bar {
+      height: 100%;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 0 0 8px 8px;
+      animation: toast-progress 3s linear forwards;
+    }
+
+    @keyframes toast-progress {
+      0% {
+        width: 100%;
+      }
+      100% {
+        width: 0;
+      }
+    }
+
+    /* 移动端适配样式 */
+    @media screen and (max-width: 768px) {
+      /* 顶部区域优化 */
+      .export-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 15px;
+      }
+      
+      .total-count {
+        width: 100%;
+        flex-wrap: wrap;
+        font-size: 12px;
+        justify-content: flex-start;
+        gap: 8px;
+      }
+      
+      .total-count span {
+        margin-left: 0 !important;
+        border-left: none !important;
+        padding-left: 0 !important;
+      }
+      
+      .export-btns {
+        width: 100%;
+      }
+      
+      .export-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+      
+      /* App列表容器优化 */
+      .table-container {
+        padding: 0;
+      }
+      
+      /* App列表布局优化 */
+      .app-list-view {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 10px;
+      }
+      
+      .app-item {
+        width: 100%;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        padding: 8px;
+        transition: all 0.3s;
+      }
+      
+      .app-item:active {
+        transform: scale(0.95);
+      }
+      
+      .app-item-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 8px;
+      }
+      
+      .app-item-name {
+        font-size: 11px;
+        margin-top: 5px;
+      }
+      
+      /* 分页区域 */
+      .pagination-area {
+        padding: 12px;
+      }
+      
+      .pagination {
+        display: flex;
+        justify-content: center;
+      }
+      
+      /* 空数据状态 */
+      .empty-data {
+        padding: 30px 0;
+      }
+      
+      .empty-data i {
+        font-size: 40px;
+      }
+      
+      .empty-data p {
+        font-size: 14px;
+      }
+    }
+    
+    /* 小型手机屏幕的额外优化 */
+    @media screen and (max-width: 480px) {
+      .app-list-view {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 12px;
+      }
+      
+      .app-item {
+        padding: 10px;
+      }
+      
+      .app-item-icon {
+        width: 48px;
+        height: 48px;
+      }
+      
+      .empty-data i {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 状态通知弹窗 -->
+  <div class="status-toast" id="statusToast">
+    <div class="status-toast-icon">
+      <i class="fa fa-check-circle"></i>
+    </div>
+    <div class="status-toast-content">
+      <span class="status-toast-title">操作成功</span>
+      <span class="status-toast-message">操作已成功完成</span>
+    </div>
+    <div class="status-toast-progress">
+      <div class="status-toast-progress-bar"></div>
+    </div>
+  </div>
+
+  <div class="tplay-body-div">
+    <!-- 隐藏的标题和搜索栏 -->
+    <div class="page-title">
+      <i class="fa fa-android"></i> <i class="fa fa-apple"></i> 已安装App
+    </div>
+    
+    <div class="search-bar">
+      <form class="layui-form" action="{:url('admin/appv1/app')}" method="post">
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+          <div class="layui-input-inline" style="width: 200px;">
+            <input type="text" name="keywords" lay-verify="title" autocomplete="off" placeholder="App名称关键词" class="layui-input">
+          </div>
+          <button class="layui-btn" lay-submit="" lay-filter="serch">
+            <i class="fa fa-search"></i> 搜索
+          </button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- 导出按钮 -->
+    <div class="export-actions">
+      <div class="total-count">
+        <i class="fa fa-android"></i> <i class="fa fa-apple"></i> 总计 <b>{notempty name="apps"}{$apps->total()}{else/}0{/notempty}</b> 个应用
+        {notempty name="bank_app_count"}
+        <span style="margin-left: 5px; border-left: 1px solid rgba(130, 87, 230, 0.3); padding-left: 5px;">
+          <i class="fa fa-university"></i> 银行类: <b>{$bank_app_count}</b> 个
+        </span>
+        {/notempty}
+        {notempty name="system_app_count"}
+        <span style="margin-left: 5px; border-left: 1px solid rgba(130, 87, 230, 0.3); padding-left: 5px;">
+          <i class="fa fa-cog"></i> 系统应用: <b>{$system_app_count}</b> 个
+        </span>
+        {/notempty}
+      </div>
+      
+      <div class="export-btns">
+        {if $current_admin.role_type == 'super_admin' || $current_admin.role_type == 'admin' || ($current_admin.role_type == 'user' && $current_admin.can_export_data == 1)}
+        <a href="{:url('appv1/exportapps',['id'=>$Think.get.id])}" class="export-btn">
+          <i class="fa fa-download"></i> 导出App列表
+        </a>
+        {else}
+        <span class="export-btn" style="opacity: 0.5; cursor: not-allowed;" title="没有导出权限">
+          <i class="fa fa-download"></i> 导出App列表
+        </span>
+        {/if}
+      </div>
+    </div>
+    
+    <!-- App表格 -->
+    <div class="table-container">
+      {notempty name="apps"}
+        <div class="app-list-view">
+          {volist name="apps" id="vo"}
+            <div class="app-item {$vo.is_bank ? 'bank-app-item' : ''}">
+              <img src="/static/admin/images/app-icon.png" class="app-item-icon" alt="{$vo.app_name}">
+              <div class="app-item-name">
+                {if condition="$vo.is_bank eq 1"}
+                  <i class="fa fa-university"></i>
+                {elseif condition="$vo.is_system eq 1"}
+                  <i class="fa fa-cog"></i>
+                {else}
+                  <i class="fa fa-android"></i>
+                {/if}
+                {$vo.app_name}
+                {if condition="$vo.is_bank eq 1"}
+                  <span class="app-tag bank-tag">银行</span>
+                {/if}
+              </div>
+            </div>
+          {/volist}
+        </div>
+      {else/}
+        <div class="empty-data">
+          <i class="fa fa-cubes"></i>
+          <p>该设备暂无已安装应用信息</p>
+        </div>
+      {/notempty}
+    </div>
+    
+    <!-- 分页 -->
+    <div class="pagination-area">
+      {notempty name="apps"}
+        <div class="pagination">{$page}</div>
+      {/notempty}
+    </div>
+  </div>
+  
+  <script src="/static/layui/layui.js" charset="utf-8"></script>
+  <script src="/static/jquery/jquery.min.js"></script>
+  <script>
+    layui.use(['form', 'layer', 'laydate'], function() {
+      var form = layui.form,
+          layer = layui.layer,
+          laydate = layui.laydate;
+          
+      // 监听搜索表单提交
+      form.on('submit(serch)', function(data) {
+        return true;
+      });
+    });
+  </script>
+</body>
+</html> 

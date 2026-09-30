@@ -1,0 +1,273 @@
+[2025-06-10T22:01:28+08:00][sql] CONNECT:[ UseTime:0.003869s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:01:28+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001264s ]
+[2025-06-10T22:01:28+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000445s ]
+[2025-06-10T22:01:32+08:00][sql] CONNECT:[ UseTime:0.005682s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:01:32+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001655s ]
+[2025-06-10T22:01:32+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.001128s ]
+[2025-06-10T22:01:32+08:00][sql] CONNECT:[ UseTime:0.001582s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:01:32+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001312s ]
+[2025-06-10T22:01:32+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000516s ]
+[2025-06-10T22:01:32+08:00][sql] CONNECT:[ UseTime:0.001728s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:01:32+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001254s ]
+[2025-06-10T22:01:32+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000438s ]
+[2025-06-10T22:01:58+08:00][sql] CONNECT:[ UseTime:0.001589s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:01:58+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001447s ]
+[2025-06-10T22:01:58+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000598s ]
+[2025-06-10T22:02:04+08:00][sql] CONNECT:[ UseTime:0.001131s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:02:04+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000871s ]
+[2025-06-10T22:02:04+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000324s ]
+[2025-06-10T22:02:16+08:00][sql] CONNECT:[ UseTime:0.000885s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:02:16+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000826s ]
+[2025-06-10T22:02:16+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000304s ]
+[2025-06-10T22:03:58+08:00][sql] CONNECT:[ UseTime:0.001248s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:03:58+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001305s ]
+[2025-06-10T22:03:58+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000475s ]
+[2025-06-10T22:04:09+08:00][sql] CONNECT:[ UseTime:0.000935s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:04:09+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000779s ]
+[2025-06-10T22:04:09+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000330s ]
+[2025-06-10T22:04:13+08:00][sql] CONNECT:[ UseTime:0.001150s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:04:13+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000958s ]
+[2025-06-10T22:04:13+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000334s ]
+[2025-06-10T22:04:13+08:00][sql] CONNECT:[ UseTime:0.000842s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:04:13+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000849s ]
+[2025-06-10T22:04:13+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000335s ]
+[2025-06-10T22:04:45+08:00][sql] CONNECT:[ UseTime:0.001087s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:04:45+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000802s ]
+[2025-06-10T22:04:45+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000280s ]
+[2025-06-10T22:04:46+08:00][sql] CONNECT:[ UseTime:0.000912s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:04:46+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000776s ]
+[2025-06-10T22:04:46+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000303s ]
+[2025-06-10T22:04:49+08:00][sql] CONNECT:[ UseTime:0.000873s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:04:49+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000735s ]
+[2025-06-10T22:04:49+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000323s ]
+[2025-06-10T22:04:49+08:00][sql] CONNECT:[ UseTime:0.000872s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:04:49+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000714s ]
+[2025-06-10T22:04:49+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000328s ]
+[2025-06-10T22:06:06+08:00][sql] CONNECT:[ UseTime:0.001836s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:06:06+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.005534s ]
+[2025-06-10T22:06:06+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.001302s ]
+[2025-06-10T22:06:18+08:00][sql] CONNECT:[ UseTime:0.005292s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:06:18+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.002361s ]
+[2025-06-10T22:06:18+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000845s ]
+[2025-06-10T22:06:20+08:00][sql] CONNECT:[ UseTime:0.002092s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:06:20+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001349s ]
+[2025-06-10T22:06:20+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000622s ]
+[2025-06-10T22:06:20+08:00][sql] CONNECT:[ UseTime:0.001571s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:06:20+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001897s ]
+[2025-06-10T22:06:20+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000499s ]
+[2025-06-10T22:06:25+08:00][sql] CONNECT:[ UseTime:0.001109s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:06:25+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001433s ]
+[2025-06-10T22:06:25+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000801s ]
+[2025-06-10T22:06:35+08:00][sql] CONNECT:[ UseTime:0.001607s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:06:35+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001713s ]
+[2025-06-10T22:06:35+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000624s ]
+[2025-06-10T22:06:36+08:00][sql] CONNECT:[ UseTime:0.001191s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:06:36+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001376s ]
+[2025-06-10T22:06:36+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000638s ]
+[2025-06-10T22:06:36+08:00][sql] CONNECT:[ UseTime:0.001657s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:06:36+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001534s ]
+[2025-06-10T22:06:36+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000742s ]
+[2025-06-10T22:07:59+08:00][sql] CONNECT:[ UseTime:0.001309s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:07:59+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001242s ]
+[2025-06-10T22:07:59+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000337s ]
+[2025-06-10T22:08:00+08:00][sql] CONNECT:[ UseTime:0.001403s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:08:00+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000926s ]
+[2025-06-10T22:08:00+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000374s ]
+[2025-06-10T22:08:00+08:00][sql] CONNECT:[ UseTime:0.001033s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:08:00+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000886s ]
+[2025-06-10T22:08:00+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000363s ]
+[2025-06-10T22:08:04+08:00][sql] CONNECT:[ UseTime:0.001351s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:08:04+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001208s ]
+[2025-06-10T22:08:04+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000675s ]
+[2025-06-10T22:08:05+08:00][sql] CONNECT:[ UseTime:0.001047s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:08:05+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001018s ]
+[2025-06-10T22:08:05+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000429s ]
+[2025-06-10T22:08:05+08:00][sql] CONNECT:[ UseTime:0.001315s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:08:05+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001428s ]
+[2025-06-10T22:08:05+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000618s ]
+[2025-06-10T22:08:32+08:00][sql] CONNECT:[ UseTime:0.001221s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:08:32+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000955s ]
+[2025-06-10T22:08:32+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000405s ]
+[2025-06-10T22:08:32+08:00][sql] CONNECT:[ UseTime:0.001199s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:08:32+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001430s ]
+[2025-06-10T22:08:32+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000569s ]
+[2025-06-10T22:08:32+08:00][sql] CONNECT:[ UseTime:0.001884s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:08:32+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.002613s ]
+[2025-06-10T22:08:32+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000812s ]
+[2025-06-10T22:08:49+08:00][sql] CONNECT:[ UseTime:0.002151s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:08:49+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001489s ]
+[2025-06-10T22:08:49+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.001130s ]
+[2025-06-10T22:17:58+08:00][sql] CONNECT:[ UseTime:0.003940s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:17:58+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.002471s ]
+[2025-06-10T22:17:58+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.001108s ]
+[2025-06-10T22:17:58+08:00][sql] CONNECT:[ UseTime:0.001637s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:17:58+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.002990s ]
+[2025-06-10T22:17:58+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000612s ]
+[2025-06-10T22:18:23+08:00][sql] CONNECT:[ UseTime:0.002275s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:18:23+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001885s ]
+[2025-06-10T22:18:23+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.001051s ]
+[2025-06-10T22:18:24+08:00][sql] CONNECT:[ UseTime:0.001541s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:18:24+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.002003s ]
+[2025-06-10T22:18:24+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000614s ]
+[2025-06-10T22:18:38+08:00][sql] CONNECT:[ UseTime:0.003272s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:18:38+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.004573s ]
+[2025-06-10T22:18:38+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.001453s ]
+[2025-06-10T22:18:50+08:00][sql] CONNECT:[ UseTime:0.001891s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:18:50+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001756s ]
+[2025-06-10T22:18:50+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000571s ]
+[2025-06-10T22:19:10+08:00][sql] CONNECT:[ UseTime:0.000896s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:19:10+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000777s ]
+[2025-06-10T22:19:10+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000378s ]
+[2025-06-10T22:19:30+08:00][sql] CONNECT:[ UseTime:0.001663s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:19:30+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001838s ]
+[2025-06-10T22:19:30+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000849s ]
+[2025-06-10T22:20:36+08:00][sql] CONNECT:[ UseTime:0.002073s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:20:36+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001898s ]
+[2025-06-10T22:20:36+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000912s ]
+[2025-06-10T22:47:04+08:00][sql] CONNECT:[ UseTime:0.001633s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:47:04+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000974s ]
+[2025-06-10T22:47:04+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000378s ]
+[2025-06-10T22:47:04+08:00][sql] CONNECT:[ UseTime:0.001160s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:47:04+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001009s ]
+[2025-06-10T22:47:04+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000320s ]
+[2025-06-10T22:47:41+08:00][sql] CONNECT:[ UseTime:0.001095s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:47:41+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000992s ]
+[2025-06-10T22:47:41+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000461s ]
+[2025-06-10T22:47:45+08:00][sql] CONNECT:[ UseTime:0.001813s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:47:45+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001292s ]
+[2025-06-10T22:47:45+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000686s ]
+[2025-06-10T22:48:07+08:00][sql] CONNECT:[ UseTime:0.001286s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:48:07+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001107s ]
+[2025-06-10T22:48:07+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000335s ]
+[2025-06-10T22:48:31+08:00][sql] CONNECT:[ UseTime:0.001234s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:48:31+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001152s ]
+[2025-06-10T22:48:31+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000355s ]
+[2025-06-10T22:48:33+08:00][sql] CONNECT:[ UseTime:0.001101s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:48:33+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001011s ]
+[2025-06-10T22:48:33+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000358s ]
+[2025-06-10T22:54:24+08:00][sql] CONNECT:[ UseTime:0.001533s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:54:24+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001065s ]
+[2025-06-10T22:54:24+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000536s ]
+[2025-06-10T22:54:27+08:00][sql] CONNECT:[ UseTime:0.001333s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:54:27+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001326s ]
+[2025-06-10T22:54:27+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000469s ]
+[2025-06-10T22:55:11+08:00][sql] CONNECT:[ UseTime:0.001225s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:55:11+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000914s ]
+[2025-06-10T22:55:11+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000341s ]
+[2025-06-10T22:55:13+08:00][sql] CONNECT:[ UseTime:0.001332s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:55:13+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000678s ]
+[2025-06-10T22:55:13+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000276s ]
+[2025-06-10T22:55:17+08:00][sql] CONNECT:[ UseTime:0.001404s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:55:17+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000886s ]
+[2025-06-10T22:55:17+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000360s ]
+[2025-06-10T22:55:49+08:00][sql] CONNECT:[ UseTime:0.001278s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:55:49+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000974s ]
+[2025-06-10T22:55:49+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000371s ]
+[2025-06-10T22:56:02+08:00][sql] CONNECT:[ UseTime:0.001249s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:56:02+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000734s ]
+[2025-06-10T22:56:02+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000276s ]
+[2025-06-10T22:56:05+08:00][sql] CONNECT:[ UseTime:0.000991s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:56:05+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000686s ]
+[2025-06-10T22:56:05+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000272s ]
+[2025-06-10T22:56:29+08:00][sql] CONNECT:[ UseTime:0.001213s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:56:29+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000812s ]
+[2025-06-10T22:56:29+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000352s ]
+[2025-06-10T22:57:08+08:00][sql] CONNECT:[ UseTime:0.001560s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:57:08+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001211s ]
+[2025-06-10T22:57:08+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000494s ]
+[2025-06-10T22:57:11+08:00][sql] CONNECT:[ UseTime:0.003811s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:57:11+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.003925s ]
+[2025-06-10T22:57:11+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.002021s ]
+[2025-06-10T22:57:48+08:00][sql] CONNECT:[ UseTime:0.001384s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:57:48+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001357s ]
+[2025-06-10T22:57:48+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000566s ]
+[2025-06-10T22:58:48+08:00][sql] CONNECT:[ UseTime:0.000932s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T22:58:48+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000698s ]
+[2025-06-10T22:58:48+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000344s ]
+[2025-06-10T23:10:16+08:00][sql] CONNECT:[ UseTime:0.002297s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:10:16+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.002094s ]
+[2025-06-10T23:10:16+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000684s ]
+[2025-06-10T23:10:49+08:00][sql] CONNECT:[ UseTime:0.001628s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:10:49+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.002983s ]
+[2025-06-10T23:10:49+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.001032s ]
+[2025-06-10T23:11:18+08:00][sql] CONNECT:[ UseTime:0.001424s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:11:18+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001517s ]
+[2025-06-10T23:11:18+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000664s ]
+[2025-06-10T23:11:25+08:00][sql] CONNECT:[ UseTime:0.002074s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:11:25+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.002388s ]
+[2025-06-10T23:11:25+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000771s ]
+[2025-06-10T23:17:29+08:00][sql] CONNECT:[ UseTime:0.000999s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:17:29+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000943s ]
+[2025-06-10T23:17:29+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000339s ]
+[2025-06-10T23:17:30+08:00][sql] CONNECT:[ UseTime:0.001303s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:17:30+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001246s ]
+[2025-06-10T23:17:30+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000448s ]
+[2025-06-10T23:17:47+08:00][sql] CONNECT:[ UseTime:0.001575s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:17:47+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001478s ]
+[2025-06-10T23:17:47+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000754s ]
+[2025-06-10T23:17:47+08:00][sql] CONNECT:[ UseTime:0.001360s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:17:47+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001449s ]
+[2025-06-10T23:17:47+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000576s ]
+[2025-06-10T23:17:48+08:00][sql] CONNECT:[ UseTime:0.001303s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:17:48+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001181s ]
+[2025-06-10T23:17:48+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000515s ]
+[2025-06-10T23:18:02+08:00][sql] CONNECT:[ UseTime:0.001194s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:18:02+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001171s ]
+[2025-06-10T23:18:02+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000483s ]
+[2025-06-10T23:18:06+08:00][sql] CONNECT:[ UseTime:0.003227s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:18:06+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001982s ]
+[2025-06-10T23:18:06+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000899s ]
+[2025-06-10T23:18:07+08:00][sql] CONNECT:[ UseTime:0.002329s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:18:07+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001981s ]
+[2025-06-10T23:18:07+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000971s ]
+[2025-06-10T23:18:16+08:00][sql] CONNECT:[ UseTime:0.001619s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:18:16+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001936s ]
+[2025-06-10T23:18:16+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000726s ]
+[2025-06-10T23:18:18+08:00][sql] CONNECT:[ UseTime:0.001267s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:18:18+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001089s ]
+[2025-06-10T23:18:18+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000451s ]
+[2025-06-10T23:18:18+08:00][sql] CONNECT:[ UseTime:0.001390s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:18:18+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001418s ]
+[2025-06-10T23:18:18+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000522s ]
+[2025-06-10T23:19:00+08:00][sql] CONNECT:[ UseTime:0.000995s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:19:00+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000880s ]
+[2025-06-10T23:19:00+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000334s ]
+[2025-06-10T23:23:21+08:00][sql] CONNECT:[ UseTime:0.001052s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:23:21+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000935s ]
+[2025-06-10T23:23:21+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000417s ]
+[2025-06-10T23:23:24+08:00][sql] CONNECT:[ UseTime:0.001367s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:23:24+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001065s ]
+[2025-06-10T23:23:24+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000475s ]
+[2025-06-10T23:23:24+08:00][sql] CONNECT:[ UseTime:0.001023s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:23:24+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000975s ]
+[2025-06-10T23:23:24+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000338s ]
+[2025-06-10T23:23:37+08:00][sql] CONNECT:[ UseTime:0.001285s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:23:37+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001409s ]
+[2025-06-10T23:23:37+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000587s ]
+[2025-06-10T23:23:38+08:00][sql] CONNECT:[ UseTime:0.000940s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:23:38+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000849s ]
+[2025-06-10T23:23:38+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000305s ]
+[2025-06-10T23:23:39+08:00][sql] CONNECT:[ UseTime:0.001794s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:23:39+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000963s ]
+[2025-06-10T23:23:39+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000372s ]
+[2025-06-10T23:28:01+08:00][sql] CONNECT:[ UseTime:0.000897s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:28:01+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000896s ]
+[2025-06-10T23:28:01+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000411s ]
+[2025-06-10T23:29:38+08:00][sql] CONNECT:[ UseTime:0.002054s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:29:38+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.002702s ]
+[2025-06-10T23:29:38+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000851s ]
+[2025-06-10T23:35:10+08:00][sql] CONNECT:[ UseTime:0.006320s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:35:10+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001481s ]
+[2025-06-10T23:35:10+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000717s ]
+[2025-06-10T23:35:57+08:00][sql] CONNECT:[ UseTime:0.001695s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:35:57+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.003237s ]
+[2025-06-10T23:35:57+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.001437s ]
+[2025-06-10T23:35:58+08:00][sql] CONNECT:[ UseTime:0.001569s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:35:58+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001361s ]
+[2025-06-10T23:35:58+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000465s ]
+[2025-06-10T23:36:18+08:00][sql] CONNECT:[ UseTime:0.001206s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:36:18+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.001095s ]
+[2025-06-10T23:36:18+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000409s ]
+[2025-06-10T23:36:19+08:00][sql] CONNECT:[ UseTime:0.001005s ] mysql:host=127.0.0.1;port=3306;dbname=nb;charset=utf8
+[2025-06-10T23:36:19+08:00][sql] SHOW FULL COLUMNS FROM `app_config` [ RunTime:0.000775s ]
+[2025-06-10T23:36:19+08:00][sql] SELECT * FROM `app_config` WHERE  `name` = 'admin_route_settings' LIMIT 1 [ RunTime:0.000283s ]
